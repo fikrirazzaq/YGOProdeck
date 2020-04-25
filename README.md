@@ -1,16 +1,13 @@
-# app
+# Yu-Gi-Oh! Database App
 
-A new Flutter application.
+Flutter app implementation using [bloclibrary.dev](https://bloclibrary.dev) and [Atomic Design](https://atomicdesign.bradfrost.com).
 
-## Getting Started
+## Repository Created & Maintained By
 
-This project is a starting point for a Flutter application.
+### Fikri Razzaq
 
-A few resources to get you started if this is your first Flutter project:
+#Flutter Enthusiast, #Android Developer.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<a href="https://medium.com/@fikrirazzaq"><img src="https://github.com/aritraroy/social-icons/blob/master/medium-icon.png?raw=true" width="60"></a>
+<a href="https://twitter.com/fikrirazzaq"><img src="https://github.com/aritraroy/social-icons/blob/master/twitter-icon.png?raw=true" width="60"></a>
+<a href="https://linkedin.com/in/fikrirazzaq"><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
