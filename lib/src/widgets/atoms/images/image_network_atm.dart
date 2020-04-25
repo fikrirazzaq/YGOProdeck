@@ -1,5 +1,6 @@
 import 'package:YGOProdeck/src/shared/shared.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ImageNetworkAtm extends StatelessWidget {
@@ -22,23 +23,35 @@ class ImageNetworkAtm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      imageBuilder: (context, image) {
-        return Ink(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
+    return kIsWeb
+        ? ClipRRect(
             borderRadius: rounded == null
                 ? BorderRadius.zero
                 : getBorderRadius(rounded, radius),
-            image: DecorationImage(
-              image: image,
+            child: Image.network(
+              url,
+              height: height,
+              width: width,
               fit: fit == null ? BoxFit.cover : fit,
             ),
-          ),
-        );
-      },
-    );
+          )
+        : CachedNetworkImage(
+            imageUrl: url,
+            imageBuilder: (context, image) {
+              return Ink(
+                height: height,
+                width: width,
+                decoration: BoxDecoration(
+                  borderRadius: rounded == null
+                      ? BorderRadius.zero
+                      : getBorderRadius(rounded, radius),
+                  image: DecorationImage(
+                    image: image,
+                    fit: fit == null ? BoxFit.cover : fit,
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

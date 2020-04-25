@@ -17,7 +17,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'YGO Prodeck',
+      title: 'Yu-Gi-Oh! Prodeck',
       theme: ThemeData(
         fontFamily: 'Muli',
         primaryColor: Colors.orange,

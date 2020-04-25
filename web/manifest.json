@@ -1,6 +1,6 @@
 {
-    "name": "app",
-    "short_name": "app",
+    "name": "Yu-Gi-Oh! Prodeck",
+    "short_name": "YGOPRODECK",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
