@@ -1,0 +1,1 @@
+export 'tmpl_home_page.dart';
