@@ -1,5 +1,5 @@
 import 'package:YGOProdeck/src/features/home/home.dart';
-import 'package:YGOProdeck/src/widgets/organisms/org_main_menu.dart';
+import 'package:YGOProdeck/src/shared/shared.dart';
 import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -23,25 +23,27 @@ class TmplHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            OrgHomeHeader(
-              imageUrl: headerImageUrl,
-              title: headerTitle,
-              subtitle: headerSubtitle,
-              searchHint: searchHint,
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        children: <Widget>[
+          OrgHomeHeader(
+            imageUrl: headerImageUrl,
+            title: headerTitle,
+            subtitle: headerSubtitle,
+            searchHint: searchHint,
+          ),
+          SizedBox(height: 30),
+          OrgMainMenu(
+            mainMenuList: mainMenuList,
+            mainMenuBuilder: (index) => MolMainMenuItem(
+              imageUrl: mainMenuList[index].imageUrl,
+              title: mainMenuList[index].title,
+              onPressed: () => Navigator.of(context).pushNamed(routeCardList),
             ),
-            SizedBox(height: 30),
-            OrgMainMenu(
-              mainMenuList: mainMenuList,
-              mainMenuBuilder: mainMenuBuilder,
-            ),
-            SizedBox(height: 20),
-          ],
-        ),
+          ),
+          SizedBox(height: 20),
+        ],
       ),
     );
   }

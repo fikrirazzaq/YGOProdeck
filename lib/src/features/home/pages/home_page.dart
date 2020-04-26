@@ -6,16 +6,13 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TmplHomePage(
-      headerImageUrl: puzzleBackground,
-      headerTitle: 'Yu-Gi-Oh! Database',
-      headerSubtitle: 'by YGOPRODECK',
-      searchHint: 'Search for cards...',
-      mainMenuList: mainMenuList,
-      mainMenuBuilder: (index) => MolMainMenuItem(
-        imageUrl: mainMenuList[index].imageUrl,
-        title: mainMenuList[index].title,
-        onPressed: () {},
+    return Scaffold(
+      body: TmplHomePage(
+        headerImageUrl: puzzleBackground,
+        headerTitle: 'Yu-Gi-Oh! Database',
+        headerSubtitle: 'by YGOPRODECK',
+        searchHint: 'Search for cards...',
+        mainMenuList: mainMenuList,
       ),
     );
   }

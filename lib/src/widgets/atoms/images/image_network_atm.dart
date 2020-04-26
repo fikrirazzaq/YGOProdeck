@@ -13,7 +13,7 @@ class ImageNetworkAtm extends StatelessWidget {
 
   const ImageNetworkAtm(
       {Key key,
-      this.url,
+      @required this.url,
       this.height,
       this.width,
       this.rounded,
@@ -35,23 +35,18 @@ class ImageNetworkAtm extends StatelessWidget {
               fit: fit == null ? BoxFit.cover : fit,
             ),
           )
-        : CachedNetworkImage(
-            imageUrl: url,
-            imageBuilder: (context, image) {
-              return Ink(
-                height: height,
-                width: width,
-                decoration: BoxDecoration(
-                  borderRadius: rounded == null
-                      ? BorderRadius.zero
-                      : getBorderRadius(rounded, radius),
-                  image: DecorationImage(
-                    image: image,
-                    fit: fit == null ? BoxFit.cover : fit,
-                  ),
-                ),
-              );
-            },
+        : ClipRRect(
+            borderRadius: rounded == null
+                ? BorderRadius.zero
+                : getBorderRadius(rounded, radius),
+            child: Container(
+              height: height,
+              width: width,
+              child: CachedNetworkImage(
+                imageUrl: url,
+                fit: fit == null ? BoxFit.cover : fit,
+              ),
+            ),
           );
   }
 }
