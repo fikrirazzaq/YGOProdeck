@@ -21,7 +21,7 @@ class MolMainMenuItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
         child: Column(
           children: <Widget>[
-            ImageNetworkAtm(
+            AtmImageNetwork(
               url: imageUrl,
               height: 120,
               width: double.infinity,

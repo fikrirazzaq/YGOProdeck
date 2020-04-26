@@ -45,7 +45,7 @@ class MolCardInfoItem extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            ImageNetworkAtm(
+                            AtmImageNetwork(
                               url: cardAttributeImageUrl,
                               height: 20,
                               width: 20,
@@ -67,7 +67,7 @@ class MolCardInfoItem extends StatelessWidget {
           Positioned(
             bottom: -80,
             right: 8,
-            child: ImageNetworkAtm(
+            child: AtmImageNetwork(
               url: cardImageUrl,
               width: 140,
             ),

@@ -1,1 +1,1 @@
-export 'image_network_atm.dart';
+export 'atm_image_network.dart';

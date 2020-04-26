@@ -19,10 +19,9 @@ class OrgCardList extends StatelessWidget {
         return MolCardInfoItem(
           cardName: cards.data[index].name,
           cardImageUrl: cards.data[index].cardImages.first.imageUrlSmall,
-          cardAttributeName: cards.data[index].attribute == null
-              ? cards.data[index].race
-              : cards.data[index].attribute,
-          cardAttributeImageUrl: 'https://ygoprodeck.com/pics/24140059.jpg',
+          cardAttributeName: cardAttribute(cards.data[index]).capitalize(),
+          cardAttributeImageUrl:
+              '$BASE_URL_ATTRIBUTE_ICON${cards.data[index].attribute}.png',
           cardColor: dark,
         );
       },

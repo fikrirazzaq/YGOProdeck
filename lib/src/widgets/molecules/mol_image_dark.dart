@@ -24,7 +24,7 @@ class MolImageDark extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        ImageNetworkAtm(
+        AtmImageNetwork(
           url: url,
           height: height,
           width: width,

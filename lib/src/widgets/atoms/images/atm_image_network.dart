@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ImageNetworkAtm extends StatelessWidget {
+class AtmImageNetwork extends StatelessWidget {
   final String url;
   final double height;
   final double width;
@@ -11,7 +11,7 @@ class ImageNetworkAtm extends StatelessWidget {
   final double radius;
   final BoxFit fit;
 
-  const ImageNetworkAtm(
+  const AtmImageNetwork(
       {Key key,
       @required this.url,
       this.height,
