@@ -1,6 +1,8 @@
 # Yu-Gi-Oh! Database App
 
-Flutter app implementation using [bloclibrary.dev](https://bloclibrary.dev) and [Atomic Design](https://atomicdesign.bradfrost.com).
+The data is provided by [YGOPRODECK API](https://ygoprodeck.com)
+
+Flutter app implementation using clean architecture with [BLOC](https://bloclibrary.dev) as state management and [Atomic Design](https://atomicdesign.bradfrost.com) for design system implementation.
 
 ## Repository Created & Maintained By
 
