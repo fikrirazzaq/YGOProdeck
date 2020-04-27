@@ -1,34 +1,45 @@
 import 'package:YGOProdeck/src/features/cards/cards.dart';
-import 'package:YGOProdeck/src/shared/network/base_url.dart';
-
-String cardAttribute(CardListData card) {
-  switch (card.type) {
-    case "Spell Card":
-    case "Skill Card":
-    case "Trap Card":
-      return card.race;
-      break;
-    default:
-      return card.attribute;
-      break;
-  }
-}
-
-String cardMainIcon(CardListData card) {
-  switch (card.type) {
-    case "Spell Card":
-    case "Skill Card":
-    case "Trap Card":
-      return cardRaceIcon(card.race);
-      break;
-    default:
-      return '$BASE_URL_IMAGE${card.attribute}.png';
-      break;
-  }
-}
+import 'package:YGOProdeck/src/shared/shared.dart';
+import 'package:flutter/material.dart';
 
 String cardTypeIcon(String type) => '$BASE_URL_CARDTYPE_ICON$type.png';
 
 String cardRaceIcon(String race) => '$BASE_URL_RACE_ICON$race.png';
 
-String cardAttributeIcon(String attribute) => '$BASE_URL_IMAGE$attribute.png';
+String cardAttributeIcon(String attribute) => '$BASE_URL_IMAGE$attribute.jpg';
+
+Color cardColor(CardListData card) {
+  if (card.type.toLowerCase().contains('monster')) {
+    switch (card.attribute.toLowerCase()) {
+      case 'dark':
+        return dark;
+        break;
+      case 'earth':
+        return earth;
+        break;
+      case 'fire':
+        return fire;
+        break;
+      case 'light':
+        return light;
+        break;
+      case 'water':
+        return water;
+        break;
+      case 'wind':
+        return wind;
+        break;
+      case 'divine':
+        return divine;
+        break;
+    }
+  }
+
+  if (card.type.toLowerCase().contains('trap')) return trap;
+
+  if (card.type.toLowerCase().contains('skill')) return skill;
+
+  if (card.type.toLowerCase().contains('spell')) return spell;
+}
+
+String atkDef(CardListData card) => "ATK/${card.atk} DEF/${card.def}";

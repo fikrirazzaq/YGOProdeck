@@ -7,3 +7,7 @@ const Color light = Color(0xffEADEA6);
 const Color water = Color(0xff87a8d0);
 const Color wind = Color(0xffddb6c6);
 const Color divine = Color(0xffF6D186);
+
+const Color trap = Color(0xffbe8abf);
+const Color spell = Color(0xff889e81);
+const Color skill = Color(0xff6a8caf);

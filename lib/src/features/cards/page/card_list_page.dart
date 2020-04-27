@@ -9,18 +9,20 @@ class CardListPage extends StatelessWidget {
     BlocProvider.of<CardListBloc>(context).add(FetchCardList());
 
     return Scaffold(
-      body: BlocBuilder<CardListBloc, CardListState>(builder: (context, state) {
-        if (state is CardListLoading) {
-          return Center(child: CircularProgressIndicator());
-        }
-        if (state is CardListLoaded) {
-          return TmplCardListPage(
-            title: 'All Cards',
-            cards: state.cards,
-          );
-        }
-        return Center(child: Text('Error'));
-      }),
+      appBar: AppBar(
+        title: AtmTextHeading4(text: 'All Cards'),
+      ),
+      body: BlocBuilder<CardListBloc, CardListState>(
+        builder: (context, state) {
+          if (state is CardListLoading)
+            return Center(child: CircularProgressIndicator());
+
+          if (state is CardListLoaded)
+            return TmplCardListPage(cards: state.cards);
+
+          return Center(child: Text('Error'));
+        },
+      ),
     );
   }
 }

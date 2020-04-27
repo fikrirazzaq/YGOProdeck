@@ -1,20 +1,26 @@
 import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class MolCardInfoItem extends StatelessWidget {
+class MolMonsterCardInfoItem extends StatelessWidget {
   final String cardName;
   final String cardImageUrl;
   final String cardAttributeName;
   final String cardAttributeImageUrl;
+  final String cardRaceName;
+  final String cardRaceImageUrl;
   final Color cardColor;
+  final String atkDef;
 
-  const MolCardInfoItem(
+  const MolMonsterCardInfoItem(
       {Key key,
       this.cardName,
       this.cardImageUrl,
       this.cardAttributeName,
       this.cardAttributeImageUrl,
-      this.cardColor})
+      this.cardColor,
+      this.cardRaceName,
+      this.cardRaceImageUrl,
+      this.atkDef})
       : super(key: key);
 
   @override
@@ -36,27 +42,22 @@ class MolCardInfoItem extends StatelessWidget {
                     children: <Widget>[
                       AtmTextHeading1(text: cardName),
                       SizedBox(height: 12),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            AtmImageNetwork(
-                              url: cardAttributeImageUrl,
-                              height: 20,
-                              width: 20,
-                            ),
-                            SizedBox(width: 8),
-                            AtmTextHeading3(
-                              text: cardAttributeName,
-                            ),
-                          ],
-                        ),
-                      )
+                      Wrap(
+                        runSpacing: 4,
+                        spacing: 4,
+                        children: <Widget>[
+                          MolClipLabelRace(
+                            imageUrl: cardAttributeImageUrl,
+                            name: cardAttributeName,
+                          ),
+                          MolClipLabelRace(
+                            imageUrl: cardRaceImageUrl,
+                            name: cardRaceName,
+                          ),
+                        ],
+                      ),
+                      Expanded(child: Container()),
+                      AtmTextHeading3(text: atkDef),
                     ],
                   ),
                 ),

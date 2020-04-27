@@ -1,6 +1,7 @@
 import 'package:YGOProdeck/src/features/cards/cards.dart';
 import 'package:YGOProdeck/src/shared/shared.dart';
-import 'package:YGOProdeck/src/widgets/molecules/mol_card_info_item.dart';
+import 'package:YGOProdeck/src/widgets/molecules/mol_monster_card_info_item.dart';
+import 'package:YGOProdeck/src/widgets/molecules/mol_nonmonster_card_info_item.dart';
 import 'package:flutter/material.dart';
 
 class OrgCardList extends StatelessWidget {
@@ -16,14 +17,28 @@ class OrgCardList extends StatelessWidget {
       itemCount: cards.data.length,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
-        return MolCardInfoItem(
-          cardName: cards.data[index].name,
-          cardImageUrl: cards.data[index].cardImages.first.imageUrlSmall,
-          cardAttributeName: cardAttribute(cards.data[index]).capitalize(),
-          cardAttributeImageUrl:
-              '$BASE_URL_ATTRIBUTE_ICON${cards.data[index].attribute}.png',
-          cardColor: dark,
-        );
+        if (cards.data[index].type.toLowerCase().contains('monster')) {
+          return MolMonsterCardInfoItem(
+            cardName: cards.data[index].name,
+            cardImageUrl: cards.data[index].cardImages.first.imageUrl,
+            cardAttributeName:
+                cards.data[index].attribute.toLowerCase().capitalize(),
+            cardAttributeImageUrl:
+                cardAttributeIcon(cards.data[index].attribute),
+            cardRaceName: cards.data[index].race,
+            cardRaceImageUrl: cardRaceIcon(cards.data[index].race),
+            cardColor: cardColor(cards.data[index]),
+            atkDef: atkDef(cards.data[index]),
+          );
+        } else {
+          return MolNonMonsterCardInfoItem(
+            cardName: cards.data[index].name,
+            cardImageUrl: cards.data[index].cardImages.first.imageUrl,
+            cardRaceName: cards.data[index].race,
+            cardRaceImageUrl: cardRaceIcon(cards.data[index].race),
+            cardColor: cardColor(cards.data[index]),
+          );
+        }
       },
     );
   }
