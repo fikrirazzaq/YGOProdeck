@@ -1,43 +1,52 @@
 import 'package:YGOProdeck/src/features/cards/cards.dart';
 import 'package:YGOProdeck/src/shared/shared.dart';
+import 'package:YGOProdeck/src/widgets/atoms/atm_primary_loading.dart';
 import 'package:YGOProdeck/src/widgets/molecules/mol_monster_card_info_item.dart';
 import 'package:YGOProdeck/src/widgets/molecules/mol_nonmonster_card_info_item.dart';
 import 'package:flutter/material.dart';
 
 class OrgCardList extends StatelessWidget {
-  final CardListResponse cards;
+  final List<CardListData> cards;
+  final ScrollController scrollController;
+  final bool hasReachedMax;
 
-  const OrgCardList({Key key, this.cards}) : super(key: key);
+  const OrgCardList(
+      {Key key, this.cards, this.scrollController, this.hasReachedMax})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: scrollController,
       shrinkWrap: false,
       physics: BouncingScrollPhysics(),
-      itemCount: cards.data.length,
+      itemCount: hasReachedMax ? cards.length : cards.length + 1,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
-        if (cards.data[index].type.toLowerCase().contains('monster')) {
-          return MolMonsterCardInfoItem(
-            cardName: cards.data[index].name,
-            cardImageUrl: cards.data[index].cardImages.first.imageUrl,
-            cardAttributeName:
-                cards.data[index].attribute.toLowerCase().capitalize(),
-            cardAttributeImageUrl:
-                cardAttributeIcon(cards.data[index].attribute),
-            cardRaceName: cards.data[index].race,
-            cardRaceImageUrl: cardRaceIcon(cards.data[index].race),
-            cardColor: cardColor(cards.data[index]),
-            atkDef: atkDef(cards.data[index]),
-          );
+        if (index >= cards.length) {
+          return Center(child: AtmPrimaryLoading());
         } else {
-          return MolNonMonsterCardInfoItem(
-            cardName: cards.data[index].name,
-            cardImageUrl: cards.data[index].cardImages.first.imageUrl,
-            cardRaceName: cards.data[index].race,
-            cardRaceImageUrl: cardRaceIcon(cards.data[index].race),
-            cardColor: cardColor(cards.data[index]),
-          );
+          if (cards[index].type.toLowerCase().contains('monster')) {
+            return MolMonsterCardInfoItem(
+              cardName: cards[index].name,
+              cardImageUrl: cards[index].cardImages.first.imageUrl,
+              cardAttributeName:
+                  cards[index].attribute.toLowerCase().capitalize(),
+              cardAttributeImageUrl: cardAttributeIcon(cards[index].attribute),
+              cardRaceName: cards[index].race,
+              cardRaceImageUrl: cardRaceIcon(cards[index].race),
+              cardColor: cardColor(cards[index]),
+              atkDef: atkDef(cards[index]),
+            );
+          } else {
+            return MolNonMonsterCardInfoItem(
+              cardName: cards[index].name,
+              cardImageUrl: cards[index].cardImages.first.imageUrl,
+              cardRaceName: cards[index].race,
+              cardRaceImageUrl: cardRaceIcon(cards[index].race),
+              cardColor: cardColor(cards[index]),
+            );
+          }
         }
       },
     );

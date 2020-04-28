@@ -3,26 +3,68 @@ import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardListPage extends StatelessWidget {
+class CardListPage extends StatefulWidget {
+  @override
+  _CardListPageState createState() => _CardListPageState();
+}
+
+class _CardListPageState extends State<CardListPage> {
+  final _scrollController = ScrollController();
+  final _scrollThreshold = 200.0;
+
+  CardListBloc _cardListBloc;
+
+  @override
+  void initState() {
+    _scrollController.addListener(_onScroll);
+
+    _cardListBloc = BlocProvider.of<CardListBloc>(context);
+    _cardListBloc.add(FetchCardList());
+  }
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CardListBloc>(context).add(FetchCardList());
-
     return Scaffold(
       appBar: AppBar(
         title: AtmTextHeading4(text: 'All Cards'),
       ),
       body: BlocBuilder<CardListBloc, CardListState>(
         builder: (context, state) {
-          if (state is CardListLoading)
-            return Center(child: CircularProgressIndicator());
+          if (state is CardListLoaded) {
+            if (state.cards.isEmpty) {
+              return Center(
+                child: Text('No cards found.'),
+              );
+            }
 
-          if (state is CardListLoaded)
-            return TmplCardListPage(cards: state.cards);
+            return TmplCardList(
+                cards: state.cards,
+                hasReachedMax: state.hasReachedMax,
+                scrollController: _scrollController);
+          }
 
-          return Center(child: Text('Error'));
+          if (state is CardListError) {
+            return Center(
+              child: Text('Failed to fetch cards.'),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    if (maxScroll - currentScroll <= _scrollThreshold) {
+      _cardListBloc.add(FetchCardList());
+    }
   }
 }

@@ -36,13 +36,12 @@ class ApiClient {
     );
   }
 
-  Future<dynamic> getRequest(String url) async {
-    final response = await _dio.get(
-      "$url",
-      options: Options(headers: {
-        '${Headers.contentTypeHeader}': 'application/json',
-      }),
-    );
+  Future<dynamic> getRequest(String url, {dynamic queryParams}) async {
+    final response = await _dio.get("$url",
+        options: Options(headers: {
+          '${Headers.contentTypeHeader}': 'application/json',
+        }),
+        queryParameters: queryParams);
 
     if (response.statusCode == 401) {
       throw Exception('${response.statusCode}');

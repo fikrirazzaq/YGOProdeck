@@ -9,15 +9,29 @@ abstract class CardListState extends Equatable {
 
 class CardListEmpty extends CardListState {}
 
-class CardListLoading extends CardListState {}
-
 class CardListLoaded extends CardListState {
-  final CardListResponse cards;
+  final List<CardListData> cards;
+  final bool hasReachedMax;
 
-  CardListLoaded({@required this.cards}) : assert(cards != null);
+  CardListLoaded({@required this.cards, @required this.hasReachedMax})
+      : assert(cards != null, hasReachedMax != null);
+
+  CardListLoaded copyWith({
+    List<CardListData> cards,
+    bool hasReachedMax,
+  }) {
+    return CardListLoaded(
+      cards: cards ?? this.cards,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
+  }
 
   @override
-  List<Object> get props => [cards];
+  List<Object> get props => [cards, hasReachedMax];
+
+  @override
+  String toString() =>
+      'CardListLoaded { cards: ${cards.length}, hasReachedMax: $hasReachedMax }';
 }
 
 class CardListError extends CardListState {}

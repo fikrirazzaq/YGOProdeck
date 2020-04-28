@@ -26,7 +26,7 @@ class MolMonsterCardInfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
+      height: 145,
       margin: EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
           color: cardColor, borderRadius: BorderRadius.circular(4)),

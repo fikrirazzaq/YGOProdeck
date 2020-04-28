@@ -7,7 +7,8 @@ class CardRepository {
   CardRepository({@required this.cardApiProvider})
       : assert(cardApiProvider != null);
 
-  Future<CardListResponse> fetchCardList() {
-    return cardApiProvider.fetchCardList();
+  Future<CardListResponse> fetchCardList({int num, int offset}) {
+    return cardApiProvider.fetchCardList(
+        offset: offset.toString(), num: num.toString());
   }
 }
