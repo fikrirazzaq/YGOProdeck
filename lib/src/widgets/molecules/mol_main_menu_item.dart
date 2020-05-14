@@ -1,6 +1,7 @@
-import 'package:YGOProdeck/src/shared/shared.dart';
-import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets.dart';
+import '../../shared/shared.dart';
 
 class MolMainMenuItem extends StatelessWidget {
   final String imageUrl;

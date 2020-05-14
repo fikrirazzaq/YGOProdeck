@@ -1,26 +1,28 @@
-part of 'card_list_bloc.dart';
+part of 'all_card_bloc.dart';
 
-abstract class CardListState extends Equatable {
-  const CardListState();
+abstract class AllCardState extends Equatable {
+  const AllCardState();
 
   @override
   List<Object> get props => [];
 }
 
-class CardListEmpty extends CardListState {}
+class AllCardEmpty extends AllCardState {}
 
-class CardListLoaded extends CardListState {
+class AllCardLoading extends AllCardState {}
+
+class AllCardLoaded extends AllCardState {
   final List<CardListData> cards;
   final bool hasReachedMax;
 
-  CardListLoaded({@required this.cards, @required this.hasReachedMax})
+  AllCardLoaded({@required this.cards, @required this.hasReachedMax})
       : assert(cards != null, hasReachedMax != null);
 
-  CardListLoaded copyWith({
+  AllCardLoaded copyWith({
     List<CardListData> cards,
     bool hasReachedMax,
   }) {
-    return CardListLoaded(
+    return AllCardLoaded(
       cards: cards ?? this.cards,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
@@ -34,4 +36,4 @@ class CardListLoaded extends CardListState {
       'CardListLoaded { cards: ${cards.length}, hasReachedMax: $hasReachedMax }';
 }
 
-class CardListError extends CardListState {}
+class AllCardError extends AllCardState {}

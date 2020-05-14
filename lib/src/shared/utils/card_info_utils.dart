@@ -42,4 +42,14 @@ Color cardColor(CardListData card) {
   if (card.type.toLowerCase().contains('spell')) return spell;
 }
 
-String atkDef(CardListData card) => "ATK/${card.atk} DEF/${card.def}";
+String atkDefList(CardListData card) => "ATK/${card.atk} DEF/${card.def}";
+
+String atkDefDetail(CardDetailData card) => "ATK/${card.atk} DEF/${card.def}";
+
+bool isSkillCard(String menu) => menu == 'Skill';
+
+bool isTrapCard(String menu) => menu == 'Trap';
+
+bool isSpellCard(String menu) => menu == 'Spell';
+
+bool isAllCard(String menu) => menu == 'All';

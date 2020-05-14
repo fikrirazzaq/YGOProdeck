@@ -1,5 +1,6 @@
-import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets.dart';
 
 class OrgHomeHeader extends StatelessWidget {
   final String imageUrl;

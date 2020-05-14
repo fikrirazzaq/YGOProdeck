@@ -1,7 +1,8 @@
-import 'package:YGOProdeck/src/features/home/home.dart';
-import 'package:YGOProdeck/src/shared/shared.dart';
-import 'package:YGOProdeck/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/home/home.dart';
+import '../widgets.dart';
+import '../../shared/shared.dart';
 
 class TmplHomePage extends StatelessWidget {
   final String headerImageUrl;
@@ -39,12 +40,32 @@ class TmplHomePage extends StatelessWidget {
             mainMenuBuilder: (index) => MolMainMenuItem(
               imageUrl: mainMenuList[index].imageUrl,
               title: mainMenuList[index].title,
-              onPressed: () => Navigator.of(context).pushNamed(routeCardList),
+              onPressed: () => _navigate(context, index),
             ),
           ),
           SizedBox(height: 20),
         ],
       ),
     );
+  }
+
+  void _navigate(context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context).pushNamed(routeAllCardList);
+        break;
+      case 1:
+        Navigator.of(context).pushNamed(routeSpellCardList);
+        break;
+      case 2:
+        Navigator.of(context).pushNamed(routeTrapCardList);
+        break;
+      case 3:
+        Navigator.of(context).pushNamed(routeSkillCardList);
+        break;
+      default:
+        Navigator.of(context).pushNamed(routeAllCardList);
+        break;
+    }
   }
 }

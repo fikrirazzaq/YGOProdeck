@@ -1,7 +1,8 @@
-import 'package:YGOProdeck/src/features/home/home.dart';
-import 'package:YGOProdeck/src/widgets/widgets.dart';
-import 'package:YGOProdeck/src/shared/shared.dart';
 import 'package:flutter/material.dart';
+
+import '../home.dart';
+import '../../../widgets/widgets.dart';
+import '../../../shared/shared.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,6 +15,14 @@ class HomePage extends StatelessWidget {
         searchHint: 'Search for cards...',
         mainMenuList: mainMenuList,
       ),
+//      bottomNavigationBar: BottomNavigationBar(
+//        selectedItemColor: Colors.black54,
+//        items: [
+//          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+//          BottomNavigationBarItem(
+//              icon: Icon(Icons.bookmark), title: Text('Saved')),
+//        ],
+//      ),
     );
   }
 
@@ -22,14 +31,14 @@ class HomePage extends StatelessWidget {
       title: 'All Cards',
       imageUrl: imgCards,
     ),
-    MainMenuData(
-      title: 'All Sets',
-      imageUrl: imgBuilder,
-    ),
-    MainMenuData(
-      title: 'Monster Cards',
-      imageUrl: imgMonster,
-    ),
+//    MainMenuData(
+//      title: 'All Sets',
+//      imageUrl: imgBuilder,
+//    ),
+//    MainMenuData(
+//      title: 'Monster Cards',
+//      imageUrl: imgMonster,
+//    ),
     MainMenuData(
       title: 'Spell Cards',
       imageUrl: imgArticle,

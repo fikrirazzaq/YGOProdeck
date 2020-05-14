@@ -1,9 +1,8 @@
-import 'package:YGOProdeck/src/features/cards/cards.dart';
-import 'package:YGOProdeck/src/shared/shared.dart';
-import 'package:YGOProdeck/src/widgets/atoms/atm_primary_loading.dart';
-import 'package:YGOProdeck/src/widgets/molecules/mol_monster_card_info_item.dart';
-import 'package:YGOProdeck/src/widgets/molecules/mol_nonmonster_card_info_item.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/cards/cards.dart';
+import '../widgets.dart';
+import '../../shared/shared.dart';
 
 class OrgCardList extends StatelessWidget {
   final List<CardListData> cards;
@@ -36,7 +35,8 @@ class OrgCardList extends StatelessWidget {
               cardRaceName: cards[index].race,
               cardRaceImageUrl: cardRaceIcon(cards[index].race),
               cardColor: cardColor(cards[index]),
-              atkDef: atkDef(cards[index]),
+              atkDef: atkDefList(cards[index]),
+              onPressed: () => onNavigateToDetail(context, card: cards[index]),
             );
           } else {
             return MolNonMonsterCardInfoItem(
@@ -45,10 +45,14 @@ class OrgCardList extends StatelessWidget {
               cardRaceName: cards[index].race,
               cardRaceImageUrl: cardRaceIcon(cards[index].race),
               cardColor: cardColor(cards[index]),
+              onPressed: () => onNavigateToDetail(context, card: cards[index]),
             );
           }
         }
       },
     );
   }
+
+  void onNavigateToDetail(context, {@required CardListData card}) =>
+      Navigator.of(context).pushNamed(routeCardDetail, arguments: card);
 }

@@ -1,5 +1,6 @@
-import 'package:YGOProdeck/src/features/home/home.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/home/home.dart';
 
 class OrgMainMenu extends StatelessWidget {
   final Function(int) mainMenuBuilder;

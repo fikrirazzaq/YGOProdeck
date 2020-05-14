@@ -1,5 +1,6 @@
-import 'package:YGOProdeck/src/widgets/atoms/atoms.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets.dart';
 
 class MolSearchBox extends StatelessWidget {
   final String hint;
