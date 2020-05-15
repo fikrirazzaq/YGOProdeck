@@ -12,4 +12,4 @@ const imgBuilder =
     'https://ygoprodeck.com/wp-content/uploads/2017/06/builder.jpg';
 const imgDeck = 'https://ygoprodeck.com/wp-content/uploads/2017/06/deck.jpg';
 
-const star = 'https://ygoprodeck.com/wp-content/uploads/2017/01/level.png';
+const imgStar = 'https://ygoprodeck.com/wp-content/uploads/2017/01/level.png';

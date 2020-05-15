@@ -6,11 +6,26 @@ import '../../../shared/shared.dart';
 class CardApiProvider {
   ApiClient _api = ApiClient();
 
-  Future<CardListResponse> fetchAllCardList({String num, String offset}) async {
-    Response response = await _api.getRequest(card, queryParams: {
-      "num": num,
-      "offset": offset,
-    });
+  Future<CardListResponse> fetchAllCardList(
+      {String num,
+      String offset,
+      CardQueryParams queryParams = const CardQueryParams()}) async {
+
+    final Map<String, String> query = {};
+    query['num'] = num;
+    query['offset'] = offset;
+
+    queryParams.type != '' ? query['type'] = queryParams.type : null;
+    queryParams.level != '' ? query['level'] = queryParams.level : null;
+    queryParams.race != '' ? query['race'] = queryParams.race : null;
+    queryParams.attribute != ''
+        ? query['attribute'] = queryParams.attribute
+        : null;
+    queryParams.atk != '' ? query['atk'] = queryParams.atk : null;
+    queryParams.def != '' ? query['def'] = queryParams.def : null;
+    queryParams.banlist != '' ? query['banlist'] = queryParams.banlist : null;
+
+    Response response = await _api.getRequest(card, queryParams: query);
     CardListResponse res = CardListResponse.fromJson(response.data);
     return res;
   }

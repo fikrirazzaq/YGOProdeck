@@ -49,7 +49,6 @@ class _TmplCardListState extends State<TmplCardList> {
   }
 
   Widget buildAllCardBody(AllCardState state) {
-    print("All Card");
     if (state is AllCardLoaded) {
       if (state.cards.isEmpty) return Center(child: Text('No cards found.'));
 
@@ -59,63 +58,70 @@ class _TmplCardListState extends State<TmplCardList> {
           scrollController: widget.scrollController);
     }
 
-    if (state is AllCardError)
-      return MolLoadFailed(onRetryPressed: widget.onRetryPressed);
+    if (state is AllCardError) return _buildError();
 
-    return Center(child: AtmPrimaryLoading());
+    return _buildLoading();
   }
 
   Widget buildTrapCardBody(TrapCardState state) {
-    print("Trap Card");
-
     if (state is TrapCardLoaded) {
-      if (state.cards.isEmpty) return Center(child: Text('No cards found.'));
+      if (state.cards.isEmpty) return _buildEmptyCardList();
 
-      return OrgCardList(
+      return _buildFilledCardList(
           cards: state.cards,
           hasReachedMax: state.hasReachedMax,
           scrollController: widget.scrollController);
     }
 
-    if (state is TrapCardError)
-      return MolLoadFailed(onRetryPressed: widget.onRetryPressed);
+    if (state is TrapCardError) return _buildError();
 
-    return Center(child: AtmPrimaryLoading());
+    return _buildLoading();
   }
 
   Widget buildSkillCardBody(SkillCardState state) {
-    print("Skill Card");
-
     if (state is SkillCardLoaded) {
-      if (state.cards.isEmpty) return Center(child: Text('No cards found.'));
+      if (state.cards.isEmpty) return _buildEmptyCardList();
 
-      return OrgCardList(
+      return _buildFilledCardList(
           cards: state.cards,
           hasReachedMax: state.hasReachedMax,
           scrollController: widget.scrollController);
     }
 
-    if (state is SkillCardError)
-      return MolLoadFailed(onRetryPressed: widget.onRetryPressed);
+    if (state is SkillCardError) return _buildError();
 
-    return Center(child: AtmPrimaryLoading());
+    return _buildLoading();
   }
 
   Widget buildSpellCardBody(SpellCardState state) {
-    print("Spell Card");
-
     if (state is SpellCardLoaded) {
-      if (state.cards.isEmpty) return Center(child: Text('No cards found.'));
+      if (state.cards.isEmpty) return _buildEmptyCardList();
 
-      return OrgCardList(
+      return _buildFilledCardList(
           cards: state.cards,
           hasReachedMax: state.hasReachedMax,
           scrollController: widget.scrollController);
     }
 
-    if (state is SpellCardError)
-      return MolLoadFailed(onRetryPressed: widget.onRetryPressed);
+    if (state is SpellCardError) return _buildError();
 
-    return Center(child: AtmPrimaryLoading());
+    return _buildLoading();
   }
+
+  Widget _buildFilledCardList({
+    List<CardListData> cards,
+    bool hasReachedMax,
+    ScrollController scrollController,
+  }) {
+    return OrgCardList(
+        cards: cards,
+        hasReachedMax: hasReachedMax,
+        scrollController: scrollController);
+  }
+
+  Widget _buildEmptyCardList() => Center(child: Text('No cards found.'));
+
+  Widget _buildError() => MolLoadFailed(onRetryPressed: widget.onRetryPressed);
+
+  Widget _buildLoading() => Center(child: AtmPrimaryLoading());
 }

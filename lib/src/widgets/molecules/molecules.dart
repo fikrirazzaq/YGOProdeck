@@ -8,3 +8,4 @@ export 'mol_card_attribute.dart';
 export 'mol_load_failed.dart';
 export 'mol_monster_card_info_item.dart';
 export 'mol_nonmonster_card_info_item.dart';
+export 'mol_filter_floating_button.dart';

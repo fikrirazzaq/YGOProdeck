@@ -16,9 +16,9 @@ class MolImageDark extends StatelessWidget {
       this.url,
       this.height,
       this.width,
-      this.rounded,
+      this.rounded = Rounded.zero,
       this.radius,
-      this.fit})
+      this.fit = BoxFit.cover})
       : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class MolImageDark extends StatelessWidget {
           height: height,
           width: width,
           fit: fit,
-          rounded: rounded == null ? Rounded.zero : rounded,
+          rounded: rounded,
           radius: radius,
         ),
         Container(
@@ -38,9 +38,7 @@ class MolImageDark extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.4),
-            borderRadius: rounded == null
-                ? BorderRadius.zero
-                : getBorderRadius(rounded, radius),
+            borderRadius: getBorderRadius(rounded, radius),
           ),
         ),
       ],

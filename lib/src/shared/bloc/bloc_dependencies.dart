@@ -18,4 +18,5 @@ List<BlocProvider> providers = [
   BlocProvider<CardDetailBloc>(
       create: (context) => CardDetailBloc(
           cardRepository: CardRepository(cardApiProvider: CardApiProvider()))),
+  BlocProvider<FilterSortCardBloc>(create: (context) => FilterSortCardBloc()),
 ];

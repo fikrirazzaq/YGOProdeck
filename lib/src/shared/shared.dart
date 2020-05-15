@@ -5,3 +5,4 @@ export 'assets.dart';
 export 'utils/utils.dart';
 export 'colors.dart';
 export 'helpers/helpers.dart';
+export 'strings.dart';

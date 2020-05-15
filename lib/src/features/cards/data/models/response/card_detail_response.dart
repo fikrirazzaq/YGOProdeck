@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'models.dart';
+import '../models.dart';
 
 class CardDetailResponse {
   List<CardDetailData> data;

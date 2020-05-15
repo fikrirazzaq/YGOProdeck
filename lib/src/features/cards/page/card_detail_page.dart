@@ -20,36 +20,38 @@ class _CardDetailPageState extends State<CardDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.card.name)),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        child: BlocConsumer<CardDetailBloc, CardDetailState>(
-            listener: (context, state) {
-          if (state is CardDetailLoaded) {
-            _refreshCompleter?.complete();
-            _refreshCompleter = Completer();
-          }
-        }, builder: (context, state) {
-          if (state is CardDetailLoaded) {
-            return RefreshIndicator(
-              color: Colors.black,
-              onRefresh: () {
-                BlocProvider.of<CardDetailBloc>(context).add(
-                  RefreshCardDetail(cardName: widget.card.name),
-                );
-                return _refreshCompleter.future;
-              },
-              child: state.card.type.toLowerCase().contains('monster')
-                  ? TmplMonsterDetailPage(state: state)
-                  : TmplNonMonsterDetailPage(state: state),
-            );
-          }
+      body: SafeArea(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          child: BlocConsumer<CardDetailBloc, CardDetailState>(
+              listener: (context, state) {
+            if (state is CardDetailLoaded) {
+              _refreshCompleter?.complete();
+              _refreshCompleter = Completer();
+            }
+          }, builder: (context, state) {
+            if (state is CardDetailLoaded) {
+              return RefreshIndicator(
+                color: Colors.black,
+                onRefresh: () {
+                  BlocProvider.of<CardDetailBloc>(context).add(
+                    RefreshCardDetail(cardName: widget.card.name),
+                  );
+                  return _refreshCompleter.future;
+                },
+                child: state.card.type.toLowerCase().contains('monster')
+                    ? TmplMonsterDetailPage(state: state)
+                    : TmplNonMonsterDetailPage(state: state),
+              );
+            }
 
-          if (state is CardDetailError) {
-            return MolLoadFailed(onRetryPressed: _fetchCardDetail);
-          }
+            if (state is CardDetailError) {
+              return MolLoadFailed(onRetryPressed: _fetchCardDetail);
+            }
 
-          return Center(child: AtmPrimaryLoading());
-        }),
+            return Center(child: AtmPrimaryLoading());
+          }),
+        ),
       ),
     );
   }

@@ -13,13 +13,15 @@ class _AllCardListPageState extends State<AllCardListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<AllCardBloc, AllCardState>(
-          builder: (context, state) => TmplCardList(
-              typeCard: 'All',
-              allCardState: state,
-              scrollController: _scrollController,
-              title: 'All Cards',
-              onRetryPressed: _fetchCardList)),
+      body: SafeArea(
+        child: BlocBuilder<AllCardBloc, AllCardState>(
+            builder: (context, state) => TmplCardList(
+                typeCard: 'All',
+                allCardState: state,
+                scrollController: _scrollController,
+                title: 'All Cards',
+                onRetryPressed: _fetchCardList)),
+      ),
     );
   }
 

@@ -15,6 +15,15 @@ class OrgCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        buildCardListView(),
+        buildFilterButton(context),
+      ],
+    );
+  }
+
+  Widget buildCardListView() {
     return ListView.builder(
       controller: scrollController,
       shrinkWrap: false,
@@ -50,6 +59,20 @@ class OrgCardList extends StatelessWidget {
           }
         }
       },
+    );
+  }
+
+  Widget buildFilterButton(context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: MolFilterFloatingButton(
+        onFilterPressed: () {
+          ShowBottomSheet.filterCards(context, onPressedButton: () {});
+        },
+        onSortPressed: () {
+          ShowBottomSheet.sortCards(context, onPressedButton: () {});
+        },
+      ),
     );
   }
 

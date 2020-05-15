@@ -12,8 +12,7 @@ part 'all_card_state.dart';
 class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
   final CardRepository cardRepository;
 
-  AllCardBloc({@required this.cardRepository})
-      : assert(cardRepository != null);
+  AllCardBloc({@required this.cardRepository}) : assert(cardRepository != null);
 
   @override
   AllCardState get initialState => AllCardEmpty();
@@ -47,13 +46,16 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
     if (event is FetchAllCard && !_hasReachedMax(currentState)) {
       try {
         if (currentState is AllCardEmpty) {
-          final cards = await cardRepository.fetchAllCardList(num: 8, offset: 0);
+          final cards = await cardRepository.fetchAllCardList(
+              num: 10, offset: 0, queryParams: CardQueryParams());
           yield AllCardLoaded(cards: cards.data, hasReachedMax: false);
           return;
         }
         if (currentState is AllCardLoaded) {
           final cards = await cardRepository.fetchAllCardList(
-              num: 8, offset: currentState.cards.length);
+              num: 10,
+              offset: currentState.cards.length,
+              queryParams: CardQueryParams());
           yield cards.data.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : AllCardLoaded(
@@ -65,10 +67,9 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
     }
   }
 
-  Stream<AllCardState> _mapRefreshCardListToState(
-      RefreshAllCard event) async* {
+  Stream<AllCardState> _mapRefreshCardListToState(RefreshAllCard event) async* {
     try {
-      final cards = await cardRepository.fetchAllCardList(num: 8, offset: 0);
+      final cards = await cardRepository.fetchAllCardList(num: 10, offset: 0);
       yield AllCardLoaded(cards: cards.data, hasReachedMax: false);
     } catch (_) {
       yield state;

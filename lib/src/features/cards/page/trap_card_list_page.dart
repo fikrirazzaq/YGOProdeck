@@ -13,13 +13,15 @@ class _TrapCardListPageState extends State<TrapCardListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<TrapCardBloc, TrapCardState>(
-          builder: (context, state) => TmplCardList(
-              typeCard: 'Trap',
-              trapCardState: state,
-              scrollController: _scrollController,
-              title: 'Trap Cards',
-              onRetryPressed: _fetchCardList)),
+      body: SafeArea(
+        child: BlocBuilder<TrapCardBloc, TrapCardState>(
+            builder: (context, state) => TmplCardList(
+                typeCard: 'Trap',
+                trapCardState: state,
+                scrollController: _scrollController,
+                title: 'Trap Cards',
+                onRetryPressed: _fetchCardList)),
+      ),
     );
   }
 

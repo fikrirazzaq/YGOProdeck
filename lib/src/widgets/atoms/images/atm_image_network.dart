@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,35 +17,31 @@ class AtmImageNetwork extends StatelessWidget {
       @required this.url,
       this.height,
       this.width,
-      this.rounded,
+      this.rounded = Rounded.zero,
       this.radius,
-      this.fit})
+      this.fit = BoxFit.cover})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return kIsWeb
         ? ClipRRect(
-            borderRadius: rounded == null
-                ? BorderRadius.zero
-                : getBorderRadius(rounded, radius),
+            borderRadius: getBorderRadius(rounded, radius),
             child: Image.network(
               url,
               height: height,
               width: width,
-              fit: fit == null ? BoxFit.cover : fit,
+              fit: fit,
             ),
           )
         : ClipRRect(
-            borderRadius: rounded == null
-                ? BorderRadius.zero
-                : getBorderRadius(rounded, radius),
+            borderRadius: getBorderRadius(rounded, radius),
             child: Container(
               height: height,
               width: width,
               child: CachedNetworkImage(
                 imageUrl: url,
-                fit: fit == null ? BoxFit.cover : fit,
+                fit: fit,
               ),
             ),
           );

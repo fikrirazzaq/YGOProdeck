@@ -21,7 +21,7 @@ class MolMonsterLevel extends StatelessWidget {
               level,
               (index) => Padding(
                 padding: EdgeInsets.only(right: 4),
-                child: AtmImageNetwork(url: star, height: 16, width: 16),
+                child: AtmImageNetwork(url: imgStar, height: 16, width: 16),
               ),
             ),
           );

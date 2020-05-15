@@ -13,13 +13,15 @@ class _SpellCardListPageState extends State<SpellCardListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<SpellCardBloc, SpellCardState>(
-          builder: (context, state) => TmplCardList(
-              typeCard: 'Spell',
-              spellCardState: state,
-              scrollController: _scrollController,
-              title: 'Spell Cards',
-              onRetryPressed: _fetchCardList)),
+      body: SafeArea(
+        child: BlocBuilder<SpellCardBloc, SpellCardState>(
+            builder: (context, state) => TmplCardList(
+                typeCard: 'Spell',
+                spellCardState: state,
+                scrollController: _scrollController,
+                title: 'Spell Cards',
+                onRetryPressed: _fetchCardList)),
+      ),
     );
   }
 
