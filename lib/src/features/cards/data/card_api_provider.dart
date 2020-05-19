@@ -7,10 +7,7 @@ class CardApiProvider {
   ApiClient _api = ApiClient();
 
   Future<CardListResponse> fetchAllCardList(
-      {String num,
-      String offset,
-      CardQueryParams queryParams = const CardQueryParams()}) async {
-
+      {String num, String offset, CardQueryParams queryParams}) async {
     final Map<String, String> query = {};
     query['num'] = num;
     query['offset'] = offset;
@@ -24,6 +21,7 @@ class CardApiProvider {
     queryParams.atk != '' ? query['atk'] = queryParams.atk : null;
     queryParams.def != '' ? query['def'] = queryParams.def : null;
     queryParams.banlist != '' ? query['banlist'] = queryParams.banlist : null;
+    queryParams.sort != '' ? query['sort'] = queryParams.sort : null;
 
     Response response = await _api.getRequest(card, queryParams: query);
     CardListResponse res = CardListResponse.fromJson(response.data);

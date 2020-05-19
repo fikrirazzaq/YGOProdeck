@@ -1,15 +1,15 @@
 class CardQueryParams {
-  final String type;
-  final String attribute;
-  final String race;
-  final String atk;
-  final String def;
-  final String sort;
-  final String level;
-  final String fname;
-  final String banlist;
+  String type;
+  String attribute;
+  String race;
+  String atk;
+  String def;
+  String sort;
+  String level;
+  String fname;
+  String banlist;
 
-  const CardQueryParams(
+  CardQueryParams(
       {this.type = '',
       this.attribute = '',
       this.race = '',

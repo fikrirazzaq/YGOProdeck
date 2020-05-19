@@ -4,68 +4,74 @@ import 'package:meta/meta.dart';
 
 import '../../../../shared/shared.dart';
 
-part 'filter_sort_card_event.dart';
+part 'filter_card_event.dart';
 
-part 'filter_sort_card_state.dart';
+part 'filter_card_state.dart';
 
-class FilterSortCardBloc
-    extends Bloc<FilterSortCardEvent, FilterSortCardState> {
+class FilterCardBloc
+    extends Bloc<FilterCardEvent, FilterCardState> {
   @override
-  FilterSortCardState get initialState => FilterSortCardState.initial();
+  FilterCardState get initialState => FilterCardState.initial();
 
   @override
   void onTransition(
-      Transition<FilterSortCardEvent, FilterSortCardState> transition) {
+      Transition<FilterCardEvent, FilterCardState> transition) {
     super.onTransition(transition);
     print(transition);
   }
 
   @override
-  Stream<FilterSortCardState> mapEventToState(
-    FilterSortCardEvent event,
+  Stream<FilterCardState> mapEventToState(
+    FilterCardEvent event,
   ) async* {
     if (event is SelectType) {
-      yield state.copyWith(
-          cardTypeSelected: event.type,
-          raceSelected: null,
-          attributeSelected: null);
+      yield state.copyWith(cardTypeSelected: event.type);
 
       if (event.type.contains('Monster')) {
         yield state.copyWith(
-            races: raceMonsterStrings, attributes: attributeStrings);
+          races: raceMonsterStrings,
+          attributes: attributeStrings,
+          atk: '',
+          def: '',
+          level: 0,
+          attributeSelected: '',
+          raceSelected: '',
+        );
       }
       if (event.type == 'Spell Card') {
         yield state.copyWith(
           races: raceSpellStrings,
-          attributeSelected: null,
-          raceSelected: null,
-          atk: null,
-          def: null,
-          level: null,
+          atk: '-1',
+          def: '-1',
+          level: -1,
           attributes: [],
+          attributeSelected: '',
+          raceSelected: '',
         );
       }
       if (event.type == 'Trap Card') {
         yield state.copyWith(
           races: raceTrapStrings,
-          attributeSelected: null,
-          raceSelected: null,
-          atk: null,
-          def: null,
-          level: null,
+          atk: '-1',
+          def: '-1',
+          level: -1,
           attributes: [],
+          attributeSelected: '',
+          raceSelected: '',
         );
       }
       if (event.type == 'Skill Card') {
         yield state.copyWith(
           races: [],
-          attributeSelected: null,
-          raceSelected: null,
-          atk: null,
-          def: null,
-          level: null,
+          atk: '-1',
+          def: '-1',
+          level: -1,
           attributes: [],
+          attributeSelected: '',
+          raceSelected: '',
         );
+        yield state.copyWith(raceSelected: null);
+        yield state.copyWith(attributeSelected: null);
       }
     }
     if (event is SelectRace) {
@@ -86,11 +92,8 @@ class FilterSortCardBloc
     if (event is SelectLevel) {
       yield state.copyWith(level: event.level);
     }
-    if (event is SelectSort) {
-      yield state.copyWith(sortSelected: event.sort);
-    }
-    if (event is ResetFilterSort) {
-      yield FilterSortCardState.initial();
+    if (event is ResetFilter) {
+      yield FilterCardState.initial();
     }
   }
 }

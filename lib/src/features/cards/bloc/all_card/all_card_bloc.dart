@@ -18,6 +18,13 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
   AllCardState get initialState => AllCardEmpty();
 
   @override
+  void onTransition(
+      Transition<AllCardEvent, AllCardState> transition) {
+    super.onTransition(transition);
+    print(transition);
+  }
+
+  @override
   Stream<Transition<AllCardEvent, AllCardState>> transformEvents(
     Stream<AllCardEvent> events,
     TransitionFunction<AllCardEvent, AllCardState> transitionFn,
@@ -30,10 +37,13 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
 
   @override
   Stream<AllCardState> mapEventToState(AllCardEvent event) async* {
+    print("EVENT: $event");
     if (event is InitFetchAllCard) {
+      print("INITFETCH ALL");
       yield AllCardEmpty();
     }
     if (event is FetchAllCard) {
+      print("FETCH ALL");
       yield* _mapFetchCardsToState(event);
     }
     if (event is RefreshAllCard) {
@@ -43,11 +53,11 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
 
   Stream<AllCardState> _mapFetchCardsToState(FetchAllCard event) async* {
     final currentState = state;
-    if (event is FetchAllCard && !_hasReachedMax(currentState)) {
+    if (!_hasReachedMax(currentState)) {
       try {
         if (currentState is AllCardEmpty) {
           final cards = await cardRepository.fetchAllCardList(
-              num: 10, offset: 0, queryParams: CardQueryParams());
+              num: 10, offset: 0, queryParams: event.params);
           yield AllCardLoaded(cards: cards.data, hasReachedMax: false);
           return;
         }
@@ -55,7 +65,7 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
           final cards = await cardRepository.fetchAllCardList(
               num: 10,
               offset: currentState.cards.length,
-              queryParams: CardQueryParams());
+              queryParams: event.params);
           yield cards.data.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : AllCardLoaded(

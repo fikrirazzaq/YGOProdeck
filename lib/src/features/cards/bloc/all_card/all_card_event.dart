@@ -10,8 +10,12 @@ class InitFetchAllCard extends AllCardEvent {
 }
 
 class FetchAllCard extends AllCardEvent {
+  final CardQueryParams params;
+
+  FetchAllCard({this.params});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [params];
 }
 
 class RefreshAllCard extends AllCardEvent {

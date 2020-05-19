@@ -7,7 +7,11 @@ abstract class AllCardState extends Equatable {
   List<Object> get props => [];
 }
 
-class AllCardEmpty extends AllCardState {}
+class AllCardEmpty extends AllCardState {
+  @override
+  String toString() =>
+      'AllCardEmpty { cards: []]}';
+}
 
 class AllCardLoading extends AllCardState {}
 
@@ -36,4 +40,8 @@ class AllCardLoaded extends AllCardState {
       'CardListLoaded { cards: ${cards.length}, hasReachedMax: $hasReachedMax }';
 }
 
-class AllCardError extends AllCardState {}
+class AllCardError extends AllCardState {
+  @override
+  String toString() =>
+      'AllCardError { cards: Err]}';
+}

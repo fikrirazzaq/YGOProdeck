@@ -36,7 +36,13 @@ class _TmplCardListState extends State<TmplCardList> {
     return Column(
       children: <Widget>[
         AppBar(title: AtmTextHeading4(text: widget.title)),
-        Expanded(child: buildBody(widget.typeCard)),
+        Expanded(
+            child: Stack(
+          children: [
+            buildBody(widget.typeCard),
+            buildFilterButton(context),
+          ],
+        )),
       ],
     );
   }
@@ -49,6 +55,7 @@ class _TmplCardListState extends State<TmplCardList> {
   }
 
   Widget buildAllCardBody(AllCardState state) {
+    print("STATTE: $state");
     if (state is AllCardLoaded) {
       if (state.cards.isEmpty) return Center(child: Text('No cards found.'));
 
@@ -124,4 +131,18 @@ class _TmplCardListState extends State<TmplCardList> {
   Widget _buildError() => MolLoadFailed(onRetryPressed: widget.onRetryPressed);
 
   Widget _buildLoading() => Center(child: AtmPrimaryLoading());
+
+  Widget buildFilterButton(context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: MolFilterFloatingButton(
+        onFilterPressed: () {
+          ShowBottomSheet.filterCards(context, onPressedButton: () {});
+        },
+        onSortPressed: () {
+          ShowBottomSheet.sortCards(context, onPressedButton: () {});
+        },
+      ),
+    );
+  }
 }

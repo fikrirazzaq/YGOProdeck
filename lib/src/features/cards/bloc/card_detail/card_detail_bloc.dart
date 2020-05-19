@@ -20,9 +20,12 @@ class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
   @override
   Stream<CardDetailState> mapEventToState(CardDetailEvent event) async* {
     if (event is InitFetchCard) {
+      print("INITFETCH DETAIL");
       yield CardDetailEmpty();
     }
     if (event is FetchCardDetail) {
+      print("FETCH DETAIL");
+
       yield* _mapFetchCardDetailToState(event);
     }
     if (event is RefreshCardDetail) {

@@ -28,71 +28,69 @@ class MolMonsterCardInfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Ink(
-        child: Container(
-          height: 136,
-          margin: EdgeInsets.only(bottom: 12),
-          decoration: BoxDecoration(
-              color: cardColor, borderRadius: BorderRadius.circular(4)),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(12),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          AtmTextHeading1(text: cardName),
-                          SizedBox(height: 12),
-                          Wrap(
-                            runSpacing: 4,
-                            spacing: 4,
-                            children: <Widget>[
-                              MolClipLabelRace(
-                                imageUrl: cardRaceImageUrl,
-                                name: cardRaceName,
-                              ),
-                              MolClipLabelRace(
-                                imageUrl: cardAttributeImageUrl,
-                                name: cardAttributeName,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+    return Container(
+      margin: EdgeInsets.only(bottom: 12),
+      height: 136,
+      decoration: BoxDecoration(
+          color: cardColor, borderRadius: BorderRadius.circular(4)),
+      child: InkWell(
+        onTap: onPressed,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(12),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        AtmTextHeading1(text: cardName),
+                        SizedBox(height: 12),
+                        Wrap(
+                          runSpacing: 4,
+                          spacing: 4,
+                          children: <Widget>[
+                            MolClipLabelRace(
+                              imageUrl: cardRaceImageUrl,
+                              name: cardRaceName,
+                            ),
+                            MolClipLabelRace(
+                              imageUrl: cardAttributeImageUrl,
+                              name: cardAttributeName,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 164),
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: -80,
-                right: 8,
-                child: AtmImageNetwork(
-                  url: cardImageUrl,
-                  width: 140,
-                ),
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(4)),
                   ),
-                  child: AtmTextHeading3(text: atkDef),
-                ),
+                  SizedBox(width: 164),
+                ],
               ),
-            ],
-          ),
+            ),
+            Positioned(
+              bottom: -80,
+              right: 8,
+              child: AtmImageNetwork(
+                url: cardImageUrl,
+                width: 140,
+              ),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(4)),
+                ),
+                child: AtmTextHeading3(text: atkDef),
+              ),
+            ),
+          ],
         ),
       ),
     );

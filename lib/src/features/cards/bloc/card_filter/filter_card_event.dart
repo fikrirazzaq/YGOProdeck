@@ -1,13 +1,13 @@
-part of 'filter_sort_card_bloc.dart';
+part of 'filter_card_bloc.dart';
 
-abstract class FilterSortCardEvent extends Equatable {
-  const FilterSortCardEvent();
+abstract class FilterCardEvent extends Equatable {
+  const FilterCardEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class SelectType extends FilterSortCardEvent {
+class SelectType extends FilterCardEvent {
   final String type;
 
   const SelectType({@required this.type});
@@ -19,7 +19,7 @@ class SelectType extends FilterSortCardEvent {
   String toString() => 'SelectType { type: $type }';
 }
 
-class SelectAttribute extends FilterSortCardEvent {
+class SelectAttribute extends FilterCardEvent {
   final String attribute;
 
   const SelectAttribute({@required this.attribute});
@@ -31,7 +31,7 @@ class SelectAttribute extends FilterSortCardEvent {
   String toString() => 'SelectAttrubute { attribute: $attribute }';
 }
 
-class SelectRace extends FilterSortCardEvent {
+class SelectRace extends FilterCardEvent {
   final String race;
 
   const SelectRace({@required this.race});
@@ -43,7 +43,7 @@ class SelectRace extends FilterSortCardEvent {
   String toString() => 'SelectRace { race: $race }';
 }
 
-class SelectBanList extends FilterSortCardEvent {
+class SelectBanList extends FilterCardEvent {
   final String banList;
 
   const SelectBanList({@required this.banList});
@@ -55,7 +55,7 @@ class SelectBanList extends FilterSortCardEvent {
   String toString() => 'SelectBanList { banList: $banList }';
 }
 
-class SelectAtk extends FilterSortCardEvent {
+class SelectAtk extends FilterCardEvent {
   final String atk;
 
   const SelectAtk({@required this.atk});
@@ -67,7 +67,7 @@ class SelectAtk extends FilterSortCardEvent {
   String toString() => 'SelectAtk { banList: $atk }';
 }
 
-class SelectDef extends FilterSortCardEvent {
+class SelectDef extends FilterCardEvent {
   final String def;
 
   const SelectDef({@required this.def});
@@ -79,7 +79,7 @@ class SelectDef extends FilterSortCardEvent {
   String toString() => 'SelectDef { def: $def }';
 }
 
-class SelectLevel extends FilterSortCardEvent {
+class SelectLevel extends FilterCardEvent {
   final double level;
 
   const SelectLevel({@required this.level});
@@ -91,20 +91,8 @@ class SelectLevel extends FilterSortCardEvent {
   String toString() => 'SelectLevel { def: $level }';
 }
 
-class SelectSort extends FilterSortCardEvent {
-  final String sort;
-
-  const SelectSort({@required this.sort});
-
-  @override
-  List<Object> get props => [sort];
-
-  @override
-  String toString() => 'SelectSort { def: $sort }';
-}
-
-class ResetFilterSort extends FilterSortCardEvent {
-  const ResetFilterSort();
+class ResetFilter extends FilterCardEvent {
+  const ResetFilter();
 
   @override
   List<Object> get props => [];

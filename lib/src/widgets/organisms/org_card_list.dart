@@ -15,12 +15,7 @@ class OrgCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        buildCardListView(),
-        buildFilterButton(context),
-      ],
-    );
+    return buildCardListView();
   }
 
   Widget buildCardListView() {
@@ -31,8 +26,12 @@ class OrgCardList extends StatelessWidget {
       itemCount: hasReachedMax ? cards.length : cards.length + 1,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
+        print("Index $index -- Lenght ${cards.length}");
         if (index >= cards.length) {
-          return Center(child: AtmPrimaryLoading());
+          if (cards.length >= 10) {
+            return Center(child: AtmPrimaryLoading());
+          }
+          return Container();
         } else {
           if (cards[index].type.toLowerCase().contains('monster')) {
             return MolMonsterCardInfoItem(
@@ -59,20 +58,6 @@ class OrgCardList extends StatelessWidget {
           }
         }
       },
-    );
-  }
-
-  Widget buildFilterButton(context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: MolFilterFloatingButton(
-        onFilterPressed: () {
-          ShowBottomSheet.filterCards(context, onPressedButton: () {});
-        },
-        onSortPressed: () {
-          ShowBottomSheet.sortCards(context, onPressedButton: () {});
-        },
-      ),
     );
   }
 

@@ -1,11 +1,10 @@
-part of 'filter_sort_card_bloc.dart';
+part of 'filter_card_bloc.dart';
 
-class FilterSortCardState extends Equatable {
+class FilterCardState extends Equatable {
   final List<String> cardTypes;
   final List<String> races;
   final List<String> attributes;
   final List<String> banList;
-  final List<String> sortList;
 
   final String cardTypeSelected;
   final String raceSelected;
@@ -16,9 +15,7 @@ class FilterSortCardState extends Equatable {
   final String def;
   final double level;
 
-  final String sortSelected;
-
-  const FilterSortCardState({
+  const FilterCardState({
     this.cardTypes,
     this.races,
     this.attributes,
@@ -30,12 +27,10 @@ class FilterSortCardState extends Equatable {
     this.atk,
     this.def,
     this.level,
-    this.sortSelected,
-    this.sortList,
   });
 
-  factory FilterSortCardState.initial() {
-    return FilterSortCardState(
+  factory FilterCardState.initial() {
+    return FilterCardState(
       cardTypes: cardTypeStrings,
       races: raceMonsterStrings,
       attributes: attributeStrings,
@@ -47,12 +42,10 @@ class FilterSortCardState extends Equatable {
       banListSelected: null,
       cardTypeSelected: null,
       raceSelected: null,
-      sortList: sortStrings,
-      sortSelected: null,
     );
   }
 
-  FilterSortCardState copyWith({
+  FilterCardState copyWith({
     List<String> cardTypes,
     List<String> races,
     List<String> attributes,
@@ -64,23 +57,19 @@ class FilterSortCardState extends Equatable {
     String atk,
     String def,
     double level,
-    String sortSelected,
-    List<String> sortList,
   }) {
-    return FilterSortCardState(
+    return FilterCardState(
         cardTypes: cardTypes ?? this.cardTypes,
         races: races ?? this.races,
         attributes: attributes ?? this.attributes,
         banList: banlist ?? this.banList,
         cardTypeSelected: cardTypeSelected ?? this.cardTypeSelected,
-        raceSelected: raceSelected ?? this.raceSelected,
+        raceSelected: raceSelected ?? this.attributeSelected,
         attributeSelected: attributeSelected ?? this.attributeSelected,
         banListSelected: banListSelected ?? this.banListSelected,
         atk: atk ?? this.atk,
         def: def ?? this.def,
-        level: level ?? this.level,
-        sortSelected: sortSelected ?? this.sortSelected,
-        sortList: sortList ?? this.sortList);
+        level: level ?? this.level);
   }
 
   @override
@@ -96,17 +85,11 @@ class FilterSortCardState extends Equatable {
         atk,
         def,
         level,
-        sortSelected,
-        sortList,
       ];
 
   @override
   String toString() {
-    return '''FilterSortCardState {
-      cardTypes: $cardTypes,
-      attributes: $attributes,
-      races: $races,
-      banList: $banList,
+    return '''FilterCardState {
       attributeSelected: $attributeSelected,
       cardTypeSelected: $cardTypeSelected,
       raceSelected: $raceSelected,
@@ -114,8 +97,6 @@ class FilterSortCardState extends Equatable {
       atk: $atk,
       def: $def,
       level: $level,
-      sortSelected: $sortSelected,
-      sortList: $sortList,
-    }''';
+      }''';
   }
 }
