@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../home.dart';
-import '../../../widgets/widgets.dart';
 import '../../../shared/shared.dart';
+import '../../../widgets/widgets.dart';
+import '../home.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -15,14 +15,6 @@ class HomePage extends StatelessWidget {
         searchHint: 'Search for cards...',
         mainMenuList: mainMenuList,
       ),
-//      bottomNavigationBar: BottomNavigationBar(
-//        selectedItemColor: Colors.black54,
-//        items: [
-//          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-//          BottomNavigationBarItem(
-//              icon: Icon(Icons.bookmark), title: Text('Saved')),
-//        ],
-//      ),
     );
   }
 

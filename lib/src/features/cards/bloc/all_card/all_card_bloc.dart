@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../cards.dart';
 
 part 'all_card_event.dart';
-
 part 'all_card_state.dart';
 
 class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
@@ -18,8 +17,7 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
   AllCardState get initialState => AllCardEmpty();
 
   @override
-  void onTransition(
-      Transition<AllCardEvent, AllCardState> transition) {
+  void onTransition(Transition<AllCardEvent, AllCardState> transition) {
     super.onTransition(transition);
     print(transition);
   }

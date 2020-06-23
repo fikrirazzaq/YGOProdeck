@@ -1,3 +1,5 @@
+import 'package:YGOProdeck/src/features/favorites/data/data.dart';
+import 'package:YGOProdeck/src/features/favorites/data/favorite_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -10,8 +12,10 @@ part 'card_detail_state.dart';
 
 class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
   final CardRepository cardRepository;
+  final FavoriteRepository favoriteRepository;
 
-  CardDetailBloc({@required this.cardRepository})
+  CardDetailBloc(
+      {@required this.cardRepository, @required this.favoriteRepository})
       : assert(cardRepository != null);
 
   @override
@@ -33,22 +37,26 @@ class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
     }
   }
 
-  Stream<CardDetailState> _mapFetchCardDetailToState(
-      FetchCardDetail event) async* {
+  Stream<CardDetailState> _mapFetchCardDetailToState(FetchCardDetail event) async* {
     try {
       final CardDetailResponse card =
           await cardRepository.fetchCardDetail(cardName: event.cardName);
-      yield CardDetailLoaded(card: card.data.first);
+      final bool containsFavorite =
+          favoriteRepository.containsFavorite(card.data.first.id);
+
+      CardDetailData data = card.data.first;
+      data.isFavorite = containsFavorite;
+
+      yield CardDetailLoaded(card: data);
     } catch (_) {
       yield CardDetailError();
     }
   }
 
-  Stream<CardDetailState> _mapRefreshCardDetailToState(
-      RefreshCardDetail event) async* {
+  Stream<CardDetailState> _mapRefreshCardDetailToState(RefreshCardDetail event) async* {
     try {
       final CardDetailResponse card =
-          await cardRepository.fetchCardDetail(cardName: event.cardName);
+      await cardRepository.fetchCardDetail(cardName: event.cardName);
       yield CardDetailLoaded(card: card.data.first);
     } catch (_) {
       yield state;

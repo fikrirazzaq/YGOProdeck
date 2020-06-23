@@ -133,7 +133,7 @@ class _BottomSheetSortCardOrgState extends State<BottomSheetSortCardOrg> {
                     ),
                   ),
                 );
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
               child: Text('APPLY'),
               color: Colors.black,

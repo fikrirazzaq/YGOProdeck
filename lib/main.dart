@@ -1,15 +1,22 @@
-import 'package:YGOProdeck/src/shared/routes/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
+import 'src/features/favorites/favorites.dart';
 import 'src/shared/shared.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  final appDocumentDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  Hive.registerAdapter<Favorite>(FavoriteAdapter());
+  await Hive.openBox<Favorite>('favorite_box');
 
   runApp(
     MultiBlocProvider(
@@ -26,9 +33,9 @@ class App extends StatelessWidget {
       title: 'Yu-Gi-Oh! Prodeck',
       theme: ThemeData(
         fontFamily: 'Muli',
-        primaryColor: Colors.white,
+        primarySwatch: Colors.orange,
       ),
-      initialRoute: routeHome,
+      initialRoute: routeMain,
       onGenerateRoute: generateRoute,
     );
   }

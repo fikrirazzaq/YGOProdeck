@@ -35,7 +35,9 @@ class _TmplCardListState extends State<TmplCardList> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        AppBar(title: AtmTextHeading4(text: widget.title)),
+        AppBar(
+            backgroundColor: Colors.white,
+            title: AtmTextHeading4(text: widget.title)),
         Expanded(
             child: Stack(
           children: [

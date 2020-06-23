@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../features/home/home.dart';
+import '../../features/_main_menu/main_menu.dart';
 import '../../features/cards/cards.dart';
 import '../shared.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case routeHome:
+    case routeMain:
       return MaterialPageRoute(
-        builder: (context) => HomePage(),
+        builder: (context) => MainMenuPage(),
       );
       break;
     case routeAllCardList:
@@ -32,9 +32,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
       break;
     case routeCardDetail:
-      CardListData card = settings.arguments as CardListData;
+      String cardName = settings.arguments as String;
       return MaterialPageRoute(
-        builder: (context) => CardDetailPage(card: card),
+        builder: (context) => CardDetailPage(cardName: cardName),
       );
       break;
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../features/cards/cards.dart';
 import '../../../shared/shared.dart';
 import '../../widgets.dart';
-import '../../../features/cards/cards.dart';
 
 class BottomSheetFilterCardOrg extends StatefulWidget {
   final Function onPressedButton;
@@ -266,8 +266,8 @@ class _BottomSheetFilterCardOrgState extends State<BottomSheetFilterCardOrg> {
                         ? ''
                         : filterState.attributeSelected,
                     def: filterState.def == null ||
-                        filterState.def == '' ||
-                        filterState.def == '-1'
+                            filterState.def == '' ||
+                            filterState.def == '-1'
                         ? ''
                         : filterState.def,
                     atk: filterState.atk == null ||
@@ -283,7 +283,7 @@ class _BottomSheetFilterCardOrgState extends State<BottomSheetFilterCardOrg> {
                   ),
                 ),
               );
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             child: Text('APPLY'),
             color: Colors.black,

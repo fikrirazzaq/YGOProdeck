@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets.dart';
 import '../../shared/shared.dart';
+import '../widgets.dart';
 
 class MolMainMenuItem extends StatelessWidget {
   final String imageUrl;
@@ -31,7 +31,10 @@ class MolMainMenuItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: AtmTextNormal(text: title),
+              child: AtmText14(
+                text: title,
+                textStyle: TextStyle(fontWeight: FontWeight.w600),
+              ),
             ),
           ],
         ),

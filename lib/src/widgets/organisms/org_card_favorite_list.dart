@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../../features/cards/cards.dart';
+import '../../features/favorites/favorites.dart';
 import '../../shared/shared.dart';
 import '../widgets.dart';
 
-class OrgCardList extends StatelessWidget {
-  final List<CardListData> cards;
-  final ScrollController scrollController;
-  final bool hasReachedMax;
+class OrgCardFavoriteList extends StatelessWidget {
+  final List<Favorite> cards;
 
-  const OrgCardList(
-      {Key key, this.cards, this.scrollController, this.hasReachedMax})
-      : super(key: key);
+  const OrgCardFavoriteList({Key key, this.cards}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return buildCardListView();
+    return Container();
   }
 
   Widget buildCardListView() {
     return ListView.builder(
-      controller: scrollController,
       shrinkWrap: false,
       physics: BouncingScrollPhysics(),
-      itemCount: hasReachedMax ? cards.length : cards.length + 1,
+      itemCount: cards.length,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
         print("Index $index -- Lenght ${cards.length}");
@@ -36,24 +32,27 @@ class OrgCardList extends StatelessWidget {
           if (cards[index].type.toLowerCase().contains('monster')) {
             return MolMonsterCardInfoItem(
               cardName: cards[index].name,
-              cardImageUrl: cards[index].cardImages.first.imageUrl,
+              cardImageUrl: cards[index].cardImage,
               cardAttributeName:
                   cards[index].attribute.toLowerCase().capitalize(),
               cardAttributeImageUrl: cardAttributeIcon(cards[index].attribute),
               cardRaceName: cards[index].race,
               cardRaceImageUrl: cardRaceIcon(cards[index].race),
-              cardColor: cardColor(cards[index]),
-              atkDef: atkDefList(cards[index]),
+              cardColor: cardColor(CardListData(
+                  type: cards[index].type, attribute: cards[index].attribute)),
+              atkDef: atkDefList(
+                  CardListData(atk: cards[index].atk, def: cards[index].def)),
               onPressed: () =>
                   onNavigateToDetail(context, cardName: cards[index].name),
             );
           } else {
             return MolNonMonsterCardInfoItem(
               cardName: cards[index].name,
-              cardImageUrl: cards[index].cardImages.first.imageUrl,
+              cardImageUrl: cards[index].cardImage,
               cardRaceName: cards[index].race,
               cardRaceImageUrl: cardRaceIcon(cards[index].race),
-              cardColor: cardColor(cards[index]),
+              cardColor: cardColor(CardListData(
+                  type: cards[index].type, attribute: cards[index].attribute)),
               onPressed: () =>
                   onNavigateToDetail(context, cardName: cards[index].name),
             );

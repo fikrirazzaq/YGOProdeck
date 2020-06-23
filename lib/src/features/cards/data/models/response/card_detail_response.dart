@@ -43,6 +43,7 @@ class CardDetailData {
   List<CardSet> cardSets;
   List<CardImage> cardImages;
   List<CardPrice> cardPrices;
+  bool isFavorite;
 
   CardDetailData({
     this.id,
@@ -58,6 +59,7 @@ class CardDetailData {
     this.cardSets,
     this.cardImages,
     this.cardPrices,
+    this.isFavorite = false,
   });
 
   factory CardDetailData.fromRawJson(String str) =>

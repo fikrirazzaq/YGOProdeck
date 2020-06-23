@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../features/home/home.dart';
-import '../widgets.dart';
 import '../../shared/shared.dart';
+import '../widgets.dart';
 
-class TmplHomePage extends StatelessWidget {
+class TmplHomePage extends StatefulWidget {
   final String headerImageUrl;
   final String headerTitle;
   final String headerSubtitle;
@@ -23,25 +23,31 @@ class TmplHomePage extends StatelessWidget {
       : super(key: key);
 
   @override
+  _TmplHomePageState createState() => _TmplHomePageState();
+}
+
+class _TmplHomePageState extends State<TmplHomePage> {
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
         children: <Widget>[
           OrgHomeHeader(
-            imageUrl: headerImageUrl,
-            title: headerTitle,
-            subtitle: headerSubtitle,
-            searchHint: searchHint,
+            imageUrl: widget.headerImageUrl,
+            title: widget.headerTitle,
+            subtitle: widget.headerSubtitle,
+            searchHint: widget.searchHint,
           ),
           SizedBox(height: 30),
           OrgMainMenu(
-            mainMenuList: mainMenuList,
-            mainMenuBuilder: (index) => MolMainMenuItem(
-              imageUrl: mainMenuList[index].imageUrl,
-              title: mainMenuList[index].title,
-              onPressed: () => _navigate(context, index),
-            ),
+            mainMenuList: widget.mainMenuList,
+            mainMenuBuilder: (index) =>
+                MolMainMenuItem(
+                  imageUrl: widget.mainMenuList[index].imageUrl,
+                  title: widget.mainMenuList[index].title,
+                  onPressed: () => _navigate(context, index),
+                ),
           ),
           SizedBox(height: 20),
         ],
@@ -52,19 +58,19 @@ class TmplHomePage extends StatelessWidget {
   void _navigate(context, int index) {
     switch (index) {
       case 0:
-        Navigator.of(context).pushNamed(routeAllCardList);
+        Navigator.pushNamed(context, routeAllCardList);
         break;
       case 1:
-        Navigator.of(context).pushNamed(routeSpellCardList);
+        Navigator.pushNamed(context, routeSpellCardList);
         break;
       case 2:
-        Navigator.of(context).pushNamed(routeTrapCardList);
+        Navigator.pushNamed(context, routeTrapCardList);
         break;
       case 3:
-        Navigator.of(context).pushNamed(routeSkillCardList);
+        Navigator.pushNamed(context, routeSkillCardList);
         break;
       default:
-        Navigator.of(context).pushNamed(routeAllCardList);
+        Navigator.pushNamed(context, routeAllCardList);
         break;
     }
   }
