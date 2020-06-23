@@ -37,5 +37,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => CardDetailPage(cardName: cardName),
       );
       break;
+    case routeSearch:
+      return MaterialPageRoute(
+        builder: (context) => SearchCardPage(),
+      );
+      break;
   }
 }

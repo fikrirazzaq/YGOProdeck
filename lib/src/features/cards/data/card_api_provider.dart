@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../cards.dart';
 import '../../../shared/shared.dart';
+import '../cards.dart';
 
 class CardApiProvider {
   ApiClient _api = ApiClient();
@@ -24,6 +24,14 @@ class CardApiProvider {
     queryParams.sort != '' ? query['sort'] = queryParams.sort : null;
 
     Response response = await _api.getRequest(card, queryParams: query);
+    CardListResponse res = CardListResponse.fromJson(response.data);
+    return res;
+  }
+
+  Future<CardListResponse> fetchSearchCard(
+      {String keyword, String num, String offset}) async {
+    Response response = await _api.getRequest(card,
+        queryParams: {"num": num, "offset": offset, "fname": keyword});
     CardListResponse res = CardListResponse.fromJson(response.data);
     return res;
   }

@@ -139,10 +139,10 @@ class _TmplCardListState extends State<TmplCardList> {
       alignment: Alignment.bottomCenter,
       child: MolFilterFloatingButton(
         onFilterPressed: () {
-          ShowBottomSheet.filterCards(context, onPressedButton: () {});
+          ShowBottomSheet.filterCards(context);
         },
         onSortPressed: () {
-          ShowBottomSheet.sortCards(context, onPressedButton: () {});
+          ShowBottomSheet.sortCards(context);
         },
       ),
     );

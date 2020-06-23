@@ -33,54 +33,40 @@ class _FavoritePageState extends State<FavoritePage> {
         builder: (BuildContext context, Box<Favorite> value, Widget child) {
           print("VAL ${value.values.toList().length}");
           return value.values.toList().length == 0
-              ? Center(child: _emptyLayout())
+              ? Center(
+                  child: MolEmptyLayout(
+                  icon: Icons.inbox,
+                  desc: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Tap",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.favorite_border,
+                          size: 24.0,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Text(
+                        "to add cards here",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[400],
+                        ),
+                      )
+                    ],
+                  ),
+                ))
               : OrgCardFavoriteList(cards: value.values.toList());
         },
       ),
-    );
-  }
-
-  Widget _emptyLayout() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.inbox,
-            size: 60.0,
-            color: Colors.grey[400],
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Tap",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[400],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.favorite_border,
-                size: 24.0,
-                color: Colors.grey[400],
-              ),
-            ),
-            Text(
-              "to add cards here",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[400],
-              ),
-            )
-          ],
-        )
-      ],
     );
   }
 }

@@ -1,6 +1,4 @@
-import 'package:YGOProdeck/src/features/favorites/favorites.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/cards/cards.dart';
 import '../../shared/shared.dart';
@@ -20,13 +18,9 @@ class OrgCardList extends StatefulWidget {
 }
 
 class _OrgCardListState extends State<OrgCardList> {
-  FavoriteBloc _favoriteBloc;
-
   @override
   void initState() {
     super.initState();
-
-    _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
   }
 
   @override
@@ -43,7 +37,6 @@ class _OrgCardListState extends State<OrgCardList> {
           widget.hasReachedMax ? widget.cards.length : widget.cards.length + 1,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
-        print("Index $index -- Lenght ${widget.cards.length}");
         if (index >= widget.cards.length) {
           if (widget.cards.length >= 10) {
             return Center(child: AtmPrimaryLoading());

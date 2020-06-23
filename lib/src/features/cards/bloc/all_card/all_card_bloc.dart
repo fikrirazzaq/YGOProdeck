@@ -38,7 +38,9 @@ class AllCardBloc extends Bloc<AllCardEvent, AllCardState> {
     print("EVENT: $event");
     if (event is InitFetchAllCard) {
       print("INITFETCH ALL");
-      yield AllCardEmpty();
+      if (state is AllCardLoaded) {
+        yield AllCardEmpty();
+      }
     }
     if (event is FetchAllCard) {
       print("FETCH ALL");

@@ -6,11 +6,6 @@ import '../../../shared/shared.dart';
 import '../../widgets.dart';
 
 class BottomSheetFilterCardOrg extends StatefulWidget {
-  final Function onPressedButton;
-
-  const BottomSheetFilterCardOrg({Key key, this.onPressedButton})
-      : super(key: key);
-
   @override
   _BottomSheetFilterCardOrgState createState() =>
       _BottomSheetFilterCardOrgState();
@@ -157,15 +152,7 @@ class _BottomSheetFilterCardOrgState extends State<BottomSheetFilterCardOrg> {
         state.banList.length,
         (index) => DropdownMenuItem<String>(
           value: state.banList[index],
-          child: Row(
-            children: [
-              AtmImageNetwork(
-                  url: cardAttributeIcon(state.banList[index].toUpperCase()),
-                  height: 14),
-              SizedBox(width: 12),
-              AtmText16(text: state.banList[index].capitalize()),
-            ],
-          ),
+          child: AtmText16(text: state.banList[index].capitalize()),
         ),
       ),
       onChanged: (value) => _filterCardBloc.add(SelectBanList(banList: value)),
@@ -271,8 +258,8 @@ class _BottomSheetFilterCardOrgState extends State<BottomSheetFilterCardOrg> {
                         ? ''
                         : filterState.def,
                     atk: filterState.atk == null ||
-                        filterState.atk == '' ||
-                        filterState.atk == '-1'
+                            filterState.atk == '' ||
+                            filterState.atk == '-1'
                         ? ''
                         : filterState.atk,
                     banlist: filterState.banListSelected ?? '',

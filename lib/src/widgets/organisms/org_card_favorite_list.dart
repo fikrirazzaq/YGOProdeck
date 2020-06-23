@@ -22,7 +22,6 @@ class OrgCardFavoriteList extends StatelessWidget {
       itemCount: cards.length,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
-        print("Index $index -- Lenght ${cards.length}");
         if (index >= cards.length) {
           if (cards.length >= 10) {
             return Center(child: AtmPrimaryLoading());

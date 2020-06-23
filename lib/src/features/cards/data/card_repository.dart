@@ -8,9 +8,18 @@ class CardRepository {
   CardRepository({@required this.cardApiProvider})
       : assert(cardApiProvider != null);
 
-  Future<CardListResponse> fetchAllCardList({int num, int offset, CardQueryParams queryParams}) {
+  Future<CardListResponse> fetchAllCardList(
+      {int num, int offset, CardQueryParams queryParams}) {
     return cardApiProvider.fetchAllCardList(
-        offset: offset.toString(), num: num.toString(), queryParams: queryParams);
+        offset: offset.toString(),
+        num: num.toString(),
+        queryParams: queryParams);
+  }
+
+  Future<CardListResponse> fetchSearchCardList(
+      {String keyword, int num, int offset}) {
+    return cardApiProvider.fetchSearchCard(
+        keyword: keyword, offset: offset.toString(), num: num.toString());
   }
 
   Future<CardListResponse> fetchTrapCardList({int num, int offset}) {

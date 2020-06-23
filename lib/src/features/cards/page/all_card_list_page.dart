@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cards.dart';
 import '../../../widgets/widgets.dart';
+import '../cards.dart';
 
 class AllCardListPage extends StatefulWidget {
   @override
@@ -14,57 +14,57 @@ class _AllCardListPageState extends State<AllCardListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<AllCardBloc, AllCardState>(
-            builder: (context, state) => TmplCardList(
-                typeCard: 'All',
-                allCardState: state,
-                scrollController: _scrollController,
-                title: 'All Cards',
-                onRetryPressed: _fetchCardList)),
+        child: BlocListener<FilterCardBloc, FilterCardState>(
+          listener: (context, state) {
+            setState(() {
+              _cardQueryParams.type = state.cardTypeSelected ?? '';
+              _cardQueryParams.attribute = state.attributeSelected == null ||
+                      state.attributeSelected == ''
+                  ? ''
+                  : state.attributeSelected;
+              _cardQueryParams.race =
+                  state.raceSelected == null || state.raceSelected == ''
+                      ? ''
+                      : state.raceSelected;
+              _cardQueryParams.level = state.level == 0 || state.level == -1
+                  ? ''
+                  : state.level.toString();
+              _cardQueryParams.banlist = state.banListSelected ?? '';
+              _cardQueryParams.atk =
+                  state.atk == null || state.atk == '' || state.atk == '-1'
+                      ? ''
+                      : state.atk;
+              _cardQueryParams.def =
+                  state.def == null || state.def == '' || state.def == '-1'
+                      ? ''
+                      : state.def;
+            });
+          },
+          child: BlocListener<SortCardBloc, SortCardState>(
+            listener: (context, state) {
+              setState(() {
+                _cardQueryParams.sort = state.sortSelected ?? '';
+              });
+            },
+            child: BlocBuilder<AllCardBloc, AllCardState>(
+                builder: (context, state) => TmplCardList(
+                    typeCard: 'All',
+                    allCardState: state,
+                    scrollController: _scrollController,
+                    title: 'All Cards',
+                    onRetryPressed: _fetchCardList)),
+          ),
+        ),
       ),
     );
   }
 
   @override
   void initState() {
-    _cardQueryParams = CardQueryParams();
-
     _scrollController.addListener(_onScroll);
-    _filterCardBloc = BlocProvider.of<FilterCardBloc>(context);
-    _sortCardBloc = BlocProvider.of<SortCardBloc>(context);
     _cardListBloc = BlocProvider.of<AllCardBloc>(context);
 
-    _filterCardBloc.listen((state) {
-      setState(() {
-        _cardQueryParams.type = state.cardTypeSelected ?? '';
-        _cardQueryParams.attribute =
-            state.attributeSelected == null || state.attributeSelected == ''
-                ? ''
-                : state.attributeSelected;
-        _cardQueryParams.race =
-            state.raceSelected == null || state.raceSelected == ''
-                ? ''
-                : state.raceSelected;
-        _cardQueryParams.level =
-            state.level == 0 || state.level == -1 ? '' : state.level.toString();
-        _cardQueryParams.banlist = state.banListSelected ?? '';
-        _cardQueryParams.atk =
-            state.atk == null || state.atk == '' || state.atk == '-1'
-                ? ''
-                : state.atk;
-        _cardQueryParams.def =
-            state.def == null || state.def == '' || state.def == '-1'
-                ? ''
-                : state.def;
-      });
-    });
-
-    _sortCardBloc.listen((state) {
-      setState(() {
-        _cardQueryParams.sort = state.sortSelected ?? '';
-      });
-    });
-
+    _cardQueryParams = CardQueryParams();
     _fetchCardList();
   }
 
@@ -80,7 +80,9 @@ class _AllCardListPageState extends State<AllCardListPage> {
     if (maxScroll - currentScroll <= _scrollThreshold) _fetchCardList();
   }
 
-  void _fetchCardList() {
+  Future<void> _fetchCardList() async {
+    _cardListBloc.add(InitFetchAllCard());
+    await Future.delayed(Duration(milliseconds: 1000));
     _cardListBloc.add(FetchAllCard(params: _cardQueryParams));
   }
 
@@ -88,8 +90,6 @@ class _AllCardListPageState extends State<AllCardListPage> {
   final _scrollThreshold = 200.0;
 
   AllCardBloc _cardListBloc;
-  FilterCardBloc _filterCardBloc;
-  SortCardBloc _sortCardBloc;
 
   CardQueryParams _cardQueryParams;
 }

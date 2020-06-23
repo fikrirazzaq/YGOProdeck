@@ -29,4 +29,8 @@ List<BlocProvider> providers = [
       create: (context) => FavoriteBloc(
           favoriteRepository:
               FavoriteRepository(favoriteDbProvider: FavoriteDbProvider()))),
+  BlocProvider<SearchCardBloc>(
+    create: (context) => SearchCardBloc(
+        cardRepository: CardRepository(cardApiProvider: CardApiProvider())),
+  )
 ];

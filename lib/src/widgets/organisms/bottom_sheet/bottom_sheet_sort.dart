@@ -5,10 +5,7 @@ import '../../../features/cards/cards.dart';
 import '../../widgets.dart';
 
 class BottomSheetSortCardOrg extends StatefulWidget {
-  final Function onPressedButton;
-
-  const BottomSheetSortCardOrg({Key key, this.onPressedButton})
-      : super(key: key);
+  const BottomSheetSortCardOrg({Key key}) : super(key: key);
 
   @override
   _BottomSheetSortCardOrgState createState() => _BottomSheetSortCardOrgState();

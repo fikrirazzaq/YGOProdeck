@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/shared.dart';
 import '../widgets.dart';
 
 class MolSearchBox extends StatelessWidget {
@@ -9,25 +10,28 @@ class MolSearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(100),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 1),
-            blurRadius: 5,
-          )
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Icon(Icons.search, color: Colors.black54),
-          SizedBox(width: 10),
-          AtmTextHeading2(text: hint),
-        ],
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, routeSearch),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0, 1),
+              blurRadius: 5,
+            )
+          ],
+        ),
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.search, color: Colors.black54),
+            SizedBox(width: 10),
+            AtmTextHeading2(text: hint),
+          ],
+        ),
       ),
     );
   }
