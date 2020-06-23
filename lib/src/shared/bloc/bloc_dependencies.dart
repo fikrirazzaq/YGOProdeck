@@ -25,5 +25,8 @@ List<BlocProvider> providers = [
               FavoriteRepository(favoriteDbProvider: FavoriteDbProvider()))),
   BlocProvider<FilterCardBloc>(create: (context) => FilterCardBloc()),
   BlocProvider<SortCardBloc>(create: (context) => SortCardBloc()),
-  BlocProvider<FavoriteBloc>(create: (context) => FavoriteBloc()),
+  BlocProvider<FavoriteBloc>(
+      create: (context) => FavoriteBloc(
+          favoriteRepository:
+              FavoriteRepository(favoriteDbProvider: FavoriteDbProvider()))),
 ];

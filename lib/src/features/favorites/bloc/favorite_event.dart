@@ -10,7 +10,7 @@ class InitFetchFavorite extends FavoriteEvent {
 }
 
 class ToggleFavorite extends FavoriteEvent {
-  final CardDetailData card;
+  final Favorite card;
 
   ToggleFavorite({@required this.card}) : assert(card != null);
 
@@ -18,9 +18,11 @@ class ToggleFavorite extends FavoriteEvent {
   List<Object> get props => [card];
 }
 
-class FetchFavoriteCards extends FavoriteEvent {
-  FetchFavoriteCards();
+class IsContainsFavorite extends FavoriteEvent {
+  final String name;
+
+  IsContainsFavorite({@required this.name}) : assert(name != null);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [name];
 }

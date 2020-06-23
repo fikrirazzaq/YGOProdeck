@@ -1,14 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
-import '../../cards/cards.dart';
 import '../../favorites/favorites.dart';
 
 part 'favorite_event.dart';
-
 part 'favorite_state.dart';
 
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
@@ -21,23 +18,18 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
   @override
   Stream<FavoriteState> mapEventToState(FavoriteEvent event) async* {
-    if (event is InitFetchFavorite) {
-      print("INITFETCH DETAIL");
-      yield FavoriteEmpty();
-    }
-    if (event is FetchFavoriteCards) {
-      print("INITFETCH DETAIL");
+    if (event is ToggleFavorite) {
       try {
-        final Box<Favorite> favorites = favoriteRepository.getFavoriteValues();
-        yield FavoriteListLoaded(favorites);
+        await favoriteRepository.toggleFavorite(event.card);
+        bool isFavorite = favoriteRepository.containsFavorite(event.card.name);
+        yield AddRemoveFavoriteResult(isFavorite);
       } catch (_) {
         yield FavoriteError();
       }
     }
-    if (event is ToggleFavorite) {
+    if (event is IsContainsFavorite) {
       try {
-        bool isFavorite = await favoriteRepository.toggleFavorite(event.card);
-
+        bool isFavorite = favoriteRepository.containsFavorite(event.name);
         yield ContainsFavorite(isFavorite);
       } catch (_) {
         yield FavoriteError();

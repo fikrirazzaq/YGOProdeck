@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 import '../../cards.dart';
 
 part 'card_detail_event.dart';
-
 part 'card_detail_state.dart';
 
 class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
@@ -37,12 +36,13 @@ class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
     }
   }
 
-  Stream<CardDetailState> _mapFetchCardDetailToState(FetchCardDetail event) async* {
+  Stream<CardDetailState> _mapFetchCardDetailToState(
+      FetchCardDetail event) async* {
     try {
       final CardDetailResponse card =
           await cardRepository.fetchCardDetail(cardName: event.cardName);
       final bool containsFavorite =
-          favoriteRepository.containsFavorite(card.data.first.id);
+          favoriteRepository.containsFavorite(card.data.first.name);
 
       CardDetailData data = card.data.first;
       data.isFavorite = containsFavorite;
@@ -53,10 +53,11 @@ class CardDetailBloc extends Bloc<CardDetailEvent, CardDetailState> {
     }
   }
 
-  Stream<CardDetailState> _mapRefreshCardDetailToState(RefreshCardDetail event) async* {
+  Stream<CardDetailState> _mapRefreshCardDetailToState(
+      RefreshCardDetail event) async* {
     try {
       final CardDetailResponse card =
-      await cardRepository.fetchCardDetail(cardName: event.cardName);
+          await cardRepository.fetchCardDetail(cardName: event.cardName);
       yield CardDetailLoaded(card: card.data.first);
     } catch (_) {
       yield state;

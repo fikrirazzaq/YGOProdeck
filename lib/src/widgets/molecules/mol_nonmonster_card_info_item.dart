@@ -60,7 +60,7 @@ class MolNonMonsterCardInfoItem extends StatelessWidget {
                   url: cardImageUrl,
                   width: 140,
                 ),
-              )
+              ),
             ],
           ),
         ),

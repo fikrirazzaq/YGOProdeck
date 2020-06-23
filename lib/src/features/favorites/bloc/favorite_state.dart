@@ -7,15 +7,13 @@ abstract class FavoriteState extends Equatable {
   List<Object> get props => [];
 }
 
-class FavoriteEmpty extends FavoriteState {}
+class AddRemoveFavoriteResult extends FavoriteState {
+  bool isFavorite;
 
-class FavoriteListLoaded extends FavoriteState {
-  final Box<Favorite> favorites;
-
-  FavoriteListLoaded(this.favorites);
+  AddRemoveFavoriteResult(this.isFavorite) : assert(isFavorite != null);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isFavorite];
 }
 
 class ContainsFavorite extends FavoriteState {
@@ -24,7 +22,9 @@ class ContainsFavorite extends FavoriteState {
   ContainsFavorite(this.isFavorite) : assert(isFavorite != null);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isFavorite];
 }
+
+class FavoriteEmpty extends FavoriteState {}
 
 class FavoriteError extends FavoriteState {}

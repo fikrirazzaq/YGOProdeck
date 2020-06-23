@@ -1,4 +1,3 @@
-import 'package:YGOProdeck/src/features/cards/cards.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
@@ -12,9 +11,10 @@ class FavoriteRepository {
 
   Box<Favorite> getFavoriteValues() => favoriteDbProvider.getBoxValues();
 
-  Future<bool> toggleFavorite(CardDetailData card) async =>
-      await favoriteDbProvider.toggleFavorite(card);
+  Future<void> toggleFavorite(Favorite card) async {
+    await favoriteDbProvider.toggleFavorite(card);
+  }
 
-  bool containsFavorite(int cardId) =>
-      favoriteDbProvider.containsFavorite(cardId);
+  bool containsFavorite(String cardName) =>
+      favoriteDbProvider.containsFavorite(cardName);
 }

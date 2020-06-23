@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:YGOProdeck/src/features/favorites/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,11 +27,37 @@ class _CardDetailPageState extends State<CardDetailPage> {
           BlocBuilder<CardDetailBloc, CardDetailState>(
               builder: (context, state) {
             if (state is CardDetailLoaded) {
-              return IconButton(
-                onPressed: () {},
-                icon: Icon(state.card.isFavorite
-                    ? Icons.favorite
-                    : Icons.favorite_border),
+              return BlocBuilder<FavoriteBloc, FavoriteState>(
+                builder: (context, favState) {
+                  if (favState is ContainsFavorite) {
+                    return IconButton(
+                      onPressed: () {
+                        _favoriteBloc.add(
+                          ToggleFavorite(
+                              card: Favorite(
+                                  name: state.card.name,
+                                  id: state.card.id,
+                                  atk: state.card.atk,
+                                  def: state.card.def,
+                                  archetype: state.card.archetype,
+                                  attribute: state.card.attribute,
+                                  desc: state.card.desc,
+                                  cardImage:
+                                      state.card.cardImages.first.imageUrl,
+                                  level: state.card.level,
+                                  race: state.card.race,
+                                  type: state.card.type)),
+                        );
+                        _favoriteBloc
+                            .add(IsContainsFavorite(name: state.card.name));
+                      },
+                      icon: Icon(favState.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border),
+                    );
+                  }
+                  return SizedBox();
+                },
               );
             }
             if (state is CardDetailError) {
@@ -39,7 +66,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                 icon: Icon(Icons.refresh),
               );
             }
-            return Container();
+            return SizedBox();
           }),
         ],
       ),
@@ -57,9 +84,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
               return RefreshIndicator(
                 color: Colors.black,
                 onRefresh: () {
-                  BlocProvider.of<CardDetailBloc>(context).add(
-                    RefreshCardDetail(cardName: widget.cardName),
-                  );
+                  BlocProvider.of<CardDetailBloc>(context)
+                      .add(RefreshCardDetail(cardName: widget.cardName));
                   return _refreshCompleter.future;
                 },
                 child: state.card.type.toLowerCase().contains('monster')
@@ -81,19 +107,22 @@ class _CardDetailPageState extends State<CardDetailPage> {
 
   @override
   void initState() {
-    super.initState();
     _refreshCompleter = Completer<void>();
 
-    cardDetailBloc = BlocProvider.of<CardDetailBloc>(context);
+    _cardDetailBloc = BlocProvider.of<CardDetailBloc>(context);
+    _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 
     _fetchCardDetail();
+    super.initState();
   }
 
   void _fetchCardDetail() {
-    cardDetailBloc.add(InitFetchCard());
-    cardDetailBloc.add(FetchCardDetail(cardName: widget.cardName));
+    _cardDetailBloc.add(InitFetchCard());
+    _cardDetailBloc.add(FetchCardDetail(cardName: widget.cardName));
+    _favoriteBloc.add(IsContainsFavorite(name: widget.cardName));
   }
 
+  FavoriteBloc _favoriteBloc;
+  CardDetailBloc _cardDetailBloc;
   Completer<void> _refreshCompleter;
-  CardDetailBloc cardDetailBloc;
 }

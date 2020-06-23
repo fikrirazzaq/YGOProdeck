@@ -1,10 +1,12 @@
+import 'package:YGOProdeck/src/features/favorites/favorites.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/cards/cards.dart';
 import '../../shared/shared.dart';
 import '../widgets.dart';
 
-class OrgCardList extends StatelessWidget {
+class OrgCardList extends StatefulWidget {
   final List<CardListData> cards;
   final ScrollController scrollController;
   final bool hasReachedMax;
@@ -14,48 +16,64 @@ class OrgCardList extends StatelessWidget {
       : super(key: key);
 
   @override
+  _OrgCardListState createState() => _OrgCardListState();
+}
+
+class _OrgCardListState extends State<OrgCardList> {
+  FavoriteBloc _favoriteBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return buildCardListView();
   }
 
   Widget buildCardListView() {
     return ListView.builder(
-      controller: scrollController,
+      controller: widget.scrollController,
       shrinkWrap: false,
       physics: BouncingScrollPhysics(),
-      itemCount: hasReachedMax ? cards.length : cards.length + 1,
+      itemCount:
+          widget.hasReachedMax ? widget.cards.length : widget.cards.length + 1,
       padding: EdgeInsets.all(16),
       itemBuilder: (context, index) {
-        print("Index $index -- Lenght ${cards.length}");
-        if (index >= cards.length) {
-          if (cards.length >= 10) {
+        print("Index $index -- Lenght ${widget.cards.length}");
+        if (index >= widget.cards.length) {
+          if (widget.cards.length >= 10) {
             return Center(child: AtmPrimaryLoading());
           }
           return Container();
         } else {
-          if (cards[index].type.toLowerCase().contains('monster')) {
+          if (widget.cards[index].type.toLowerCase().contains('monster')) {
             return MolMonsterCardInfoItem(
-              cardName: cards[index].name,
-              cardImageUrl: cards[index].cardImages.first.imageUrl,
+              cardName: widget.cards[index].name,
+              cardImageUrl: widget.cards[index].cardImages.first.imageUrl,
               cardAttributeName:
-                  cards[index].attribute.toLowerCase().capitalize(),
-              cardAttributeImageUrl: cardAttributeIcon(cards[index].attribute),
-              cardRaceName: cards[index].race,
-              cardRaceImageUrl: cardRaceIcon(cards[index].race),
-              cardColor: cardColor(cards[index]),
-              atkDef: atkDefList(cards[index]),
-              onPressed: () =>
-                  onNavigateToDetail(context, cardName: cards[index].name),
+                  widget.cards[index].attribute.toLowerCase().capitalize(),
+              cardAttributeImageUrl:
+                  cardAttributeIcon(widget.cards[index].attribute),
+              cardRaceName: widget.cards[index].race,
+              cardRaceImageUrl: cardRaceIcon(widget.cards[index].race),
+              cardColor: cardColor(widget.cards[index]),
+              atkDef: atkDefList(widget.cards[index]),
+              onPressed: () => onNavigateToDetail(context,
+                  cardName: widget.cards[index].name),
             );
           } else {
             return MolNonMonsterCardInfoItem(
-              cardName: cards[index].name,
-              cardImageUrl: cards[index].cardImages.first.imageUrl,
-              cardRaceName: cards[index].race,
-              cardRaceImageUrl: cardRaceIcon(cards[index].race),
-              cardColor: cardColor(cards[index]),
-              onPressed: () =>
-                  onNavigateToDetail(context, cardName: cards[index].name),
+              cardName: widget.cards[index].name,
+              cardImageUrl: widget.cards[index].cardImages.first.imageUrl,
+              cardRaceName: widget.cards[index].race,
+              cardRaceImageUrl: cardRaceIcon(widget.cards[index].race),
+              cardColor: cardColor(widget.cards[index]),
+              onPressed: () => onNavigateToDetail(context,
+                  cardName: widget.cards[index].name),
             );
           }
         }
