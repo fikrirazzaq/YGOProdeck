@@ -10,10 +10,10 @@ class FavoriteDbProvider {
   }
 
   Future<void> toggleFavorite(Favorite card) async {
-    if (_favoriteBox.containsKey(card.id)) {
-      await _favoriteBox.delete(card.id);
+    if (_favoriteBox.containsKey(card.name)) {
+      await _favoriteBox.delete(card.name);
     } else {
-      await _favoriteBox.put(card.id, card);
+      await _favoriteBox.put(card.name, card);
     }
   }
 

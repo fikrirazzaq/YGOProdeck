@@ -5,10 +5,10 @@ part 'favorite.g.dart';
 @HiveType(typeId: 1)
 class Favorite {
   @HiveField(0)
-  final int id;
+  final String name;
 
   @HiveField(1)
-  final String name;
+  final int id;
 
   @HiveField(2)
   final String type;

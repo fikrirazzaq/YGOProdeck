@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'src/features/favorites/favorites.dart';
 import 'src/shared/shared.dart';
 
 Future<void> main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter<Favorite>(FavoriteAdapter());
+  await Hive.openBox<Favorite>('favorite_box');
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
-  final appDocumentDir = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDir.path);
-  Hive.registerAdapter<Favorite>(FavoriteAdapter());
-  await Hive.openBox<Favorite>('favorite_box');
 
   runApp(
     MultiBlocProvider(

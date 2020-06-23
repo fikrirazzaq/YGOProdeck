@@ -12,12 +12,12 @@ class OrgCardFavoriteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return buildCardListView();
   }
 
   Widget buildCardListView() {
     return ListView.builder(
-      shrinkWrap: false,
+      shrinkWrap: true,
       physics: BouncingScrollPhysics(),
       itemCount: cards.length,
       padding: EdgeInsets.all(16),

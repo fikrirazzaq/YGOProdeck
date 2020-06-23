@@ -8,14 +8,17 @@ part of 'favorite.dart';
 
 class FavoriteAdapter extends TypeAdapter<Favorite> {
   @override
+  final typeId = 1;
+
+  @override
   Favorite read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Favorite(
-      name: fields[1] as String,
-      id: fields[0] as int,
+      name: fields[0] as String,
+      id: fields[1] as int,
       type: fields[2] as String,
       desc: fields[3] as String,
       atk: fields[4] as int,
@@ -33,9 +36,9 @@ class FavoriteAdapter extends TypeAdapter<Favorite> {
     writer
       ..writeByte(11)
       ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
       ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.id)
       ..writeByte(2)
       ..write(obj.type)
       ..writeByte(3)
@@ -55,7 +58,4 @@ class FavoriteAdapter extends TypeAdapter<Favorite> {
       ..writeByte(10)
       ..write(obj.cardImage);
   }
-
-  @override
-  int get typeId => 1;
 }
