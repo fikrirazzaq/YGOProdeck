@@ -20,28 +20,16 @@ class HomePage extends StatelessWidget {
 
   List<MainMenuData> mainMenuList = [
     MainMenuData(
-      title: 'All Cards',
+      title: 'Cards',
       imageUrl: imgCards,
     ),
-//    MainMenuData(
-//      title: 'All Sets',
-//      imageUrl: imgBuilder,
-//    ),
-//    MainMenuData(
-//      title: 'Monster Cards',
-//      imageUrl: imgMonster,
-//    ),
     MainMenuData(
-      title: 'Spell Cards',
-      imageUrl: imgArticle,
-    ),
-    MainMenuData(
-      title: 'Trap Cards',
-      imageUrl: imgSpell,
-    ),
-    MainMenuData(
-      title: 'Skill Cards',
+      title: 'Sets',
       imageUrl: imgDeck,
+    ),
+    MainMenuData(
+      title: 'Changelog',
+      imageUrl: imgArticle,
     ),
   ];
 }

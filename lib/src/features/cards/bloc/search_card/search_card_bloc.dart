@@ -53,6 +53,7 @@ class SearchCardBloc extends Bloc<SearchCardEvent, SearchCardState> {
     if (!_hasReachedMax(state)) {
       try {
         if (currentState is SearchCardEmpty) {
+          yield SearchCardLoading();
           final cards = await cardRepository.fetchSearchCardList(
               keyword: event.keyword, num: 10, offset: 0);
           yield SearchCardLoaded(cards: cards.data, hasReachedMax: false);
@@ -65,7 +66,8 @@ class SearchCardBloc extends Bloc<SearchCardEvent, SearchCardState> {
               offset: currentState.cards.length);
           yield cards.data.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
-              : SearchCardLoaded(cards: cards.data, hasReachedMax: true);
+              : SearchCardLoaded(
+                  cards: currentState.cards + cards.data, hasReachedMax: true);
         }
       } catch (_) {
         yield SearchCardError();

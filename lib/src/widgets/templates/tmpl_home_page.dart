@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../features/home/home.dart';
 import '../../shared/shared.dart';
@@ -42,12 +43,11 @@ class _TmplHomePageState extends State<TmplHomePage> {
           SizedBox(height: 30),
           OrgMainMenu(
             mainMenuList: widget.mainMenuList,
-            mainMenuBuilder: (index) =>
-                MolMainMenuItem(
-                  imageUrl: widget.mainMenuList[index].imageUrl,
-                  title: widget.mainMenuList[index].title,
-                  onPressed: () => _navigate(context, index),
-                ),
+            mainMenuBuilder: (index) => MolMainMenuItem(
+              imageUrl: widget.mainMenuList[index].imageUrl,
+              title: widget.mainMenuList[index].title,
+              onPressed: () => _navigate(context, index),
+            ),
           ),
           SizedBox(height: 20),
         ],
@@ -61,13 +61,10 @@ class _TmplHomePageState extends State<TmplHomePage> {
         Navigator.pushNamed(context, routeAllCardList);
         break;
       case 1:
-        Navigator.pushNamed(context, routeSpellCardList);
+        Fluttertoast.showToast(msg: 'Not yet ready.');
         break;
       case 2:
-        Navigator.pushNamed(context, routeTrapCardList);
-        break;
-      case 3:
-        Navigator.pushNamed(context, routeSkillCardList);
+        Fluttertoast.showToast(msg: 'Not yet ready.');
         break;
       default:
         Navigator.pushNamed(context, routeAllCardList);

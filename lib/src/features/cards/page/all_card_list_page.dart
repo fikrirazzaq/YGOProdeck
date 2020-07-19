@@ -51,7 +51,7 @@ class _AllCardListPageState extends State<AllCardListPage> {
                     typeCard: 'All',
                     allCardState: state,
                     scrollController: _scrollController,
-                    title: 'All Cards',
+                    title: 'Cards',
                     onRetryPressed: _fetchCardList)),
           ),
         ),
